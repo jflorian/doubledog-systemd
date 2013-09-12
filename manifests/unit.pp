@@ -12,6 +12,7 @@
 #       running         true            unit is to be running/stopped now
 #       content*        undef           path to template content
 #       source*         undef           URL to source content
+#       restart_events  undef           events that should cause unit restart
 #
 #       * content/source are mutually exclusive and one must be set.  If both
 #       are set, only content will be honored; source will be ignored.
@@ -29,7 +30,7 @@
 
 
 define systemd::unit ($ensure='present', $enable=true, $running=true,
-                      $content=undef, $source=undef) {
+                      $content=undef, $source=undef, $restart_events=undef) {
 
     if $ensure == 'present' {
 
@@ -41,6 +42,13 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
         exec { "systemctl start $name":
             require => Exec["daemon-reload for unit $name"],
             unless  => "systemctl is-active $name",
+        }
+
+        if $restart_events != undef {
+            exec { "systemctl restart $name":
+                refreshonly => true,
+                subscribe   => $restart_events,
+            }
         }
 
     } elsif $ensure == 'absent' {
