@@ -34,13 +34,13 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
     if $ensure == 'present' {
 
         exec { "systemctl enable $name":
-            require     => Exec["daemon-reload for unit $name"],
-            unless      => "systemctl is-enabled $name",
+            require => Exec["daemon-reload for unit $name"],
+            unless  => "systemctl is-enabled $name",
         }
 
         exec { "systemctl start $name":
-            require     => Exec["daemon-reload for unit $name"],
-            unless      => "systemctl is-active $name",
+            require => Exec["daemon-reload for unit $name"],
+            unless  => "systemctl is-active $name",
         }
 
     } elsif $ensure == 'absent' {
@@ -74,36 +74,36 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
     if $content != undef {
 
         file { "/etc/systemd/system/${name}":
-            content     => $content,
-            ensure      => $ensure,
-            group       => 'root',
-            mode        => '0640',
-            notify      => Exec["daemon-reload for unit $name"],
-            owner       => 'root',
-            seluser     => 'system_u',
-            selrole     => 'object_r',
-            seltype     => 'systemd_unit_file_t',
+            content => $content,
+            ensure  => $ensure,
+            group   => 'root',
+            mode    => '0640',
+            notify  => Exec["daemon-reload for unit $name"],
+            owner   => 'root',
+            seluser => 'system_u',
+            selrole => 'object_r',
+            seltype => 'systemd_unit_file_t',
         }
 
     } else {
 
         file { "/etc/systemd/system/${name}":
-            ensure      => $ensure,
-            group       => 'root',
-            mode        => '0640',
-            notify      => Exec["daemon-reload for unit $name"],
-            owner       => 'root',
-            seluser     => 'system_u',
-            selrole     => 'object_r',
-            seltype     => 'systemd_unit_file_t',
-            source      => $source,
+            ensure  => $ensure,
+            group   => 'root',
+            mode    => '0640',
+            notify  => Exec["daemon-reload for unit $name"],
+            owner   => 'root',
+            seluser => 'system_u',
+            selrole => 'object_r',
+            seltype => 'systemd_unit_file_t',
+            source  => $source,
         }
 
     }
 
     exec { "daemon-reload for unit $name":
-        command         => 'systemctl daemon-reload',
-        refreshonly     => true,
+        command     => 'systemctl daemon-reload',
+        refreshonly => true,
     }
 
 }
