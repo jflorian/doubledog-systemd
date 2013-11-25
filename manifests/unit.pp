@@ -38,6 +38,17 @@
 define systemd::unit ($ensure='present', $enable=true, $running=true,
                       $content=undef, $source=undef, $restart_events=undef) {
 
+    File {
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        notify  => Exec["daemon-reload for unit $name"],
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'systemd_unit_file_t',
+    }
+
     if $ensure == 'present' {
 
         exec { "systemctl enable $name":
@@ -89,27 +100,11 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
 
         file { "/etc/systemd/system/${name}":
             content => $content,
-            ensure  => $ensure,
-            group   => 'root',
-            mode    => '0640',
-            notify  => Exec["daemon-reload for unit $name"],
-            owner   => 'root',
-            seluser => 'system_u',
-            selrole => 'object_r',
-            seltype => 'systemd_unit_file_t',
         }
 
     } else {
 
         file { "/etc/systemd/system/${name}":
-            ensure  => $ensure,
-            group   => 'root',
-            mode    => '0640',
-            notify  => Exec["daemon-reload for unit $name"],
-            owner   => 'root',
-            seluser => 'system_u',
-            selrole => 'object_r',
-            seltype => 'systemd_unit_file_t',
             source  => $source,
         }
 
