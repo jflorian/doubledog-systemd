@@ -13,7 +13,7 @@
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*enable*]
-#   Instance is to be enabled at boot.  The default is 'true'.
+#   Instance is to be enabled at boot.  The default is true.
 #
 # [*running*]
 #   Instance is to be running/stopped now.  The default is 'true'.
