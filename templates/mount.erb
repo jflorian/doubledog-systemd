@@ -1,0 +1,28 @@
+[Unit]
+Description=<%= mnt_description %>
+DefaultDependencies=no
+<% if @mnt_requires -%>
+Requires=<%= mnt_requires %>
+<% end -%>
+<% if @mnt_before -%>
+Before=<%= mnt_before %>
+<% end -%>
+<% if @mnt_after -%>
+After=<%= mnt_after %>
+<% end -%>
+
+[Mount]
+What=<%= mnt_what %>
+Where=<%= mnt_where %>
+<% if @mnt_type -%>
+Type=<%= mnt_type %>
+<% end -%>
+<% if @mnt_options -%>
+Options=<%= mnt_options %>
+<% end -%>
+<% if @mnt_dir_mode -%>
+DirectoryMode=<%= mnt_dir_mode %>
+<% end -%>
+<% if @mnt_timeout -%>
+TimeoutSec=<%= mnt_timeout %>
+<% end -%>
