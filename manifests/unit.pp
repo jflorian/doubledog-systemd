@@ -1,32 +1,38 @@
 # modules/systemd/manifests/unit.pp
 #
-# Synopsis:
-#       Install a systemd unit.
+# == Define: systemd::unit
 #
-# Parameters:
-#       Name__________  Default_______  Description___________________________
+# Installs a systemd unit configuration file.
 #
-#       name                            name of the systemd unit
-#       ensure          present         unit is to be present/absent
-#       enable          true            unit is to be enabled/disabled at boot
-#       running         true            unit is to be running/stopped now
-#       content*        undef           path to template content
-#       source*         undef           URL to source content
-#       restart_events  undef           events that should cause unit restart
+# === Parameters
 #
-#       * content/source are mutually exclusive and one must be set.  If both
-#       are set, only content will be honored; source will be ignored.
+# [*namevar*]
+#   An arbitrary identifier for the unit file.
 #
-# Requires:
-#       Class['systemd']
+# [*ensure*]
+#   Instance is to be 'present' (default) or 'absent'.
 #
-# Example usage:
+# [*enable*]
+#   Instance is to be enabled at boot.  The default is 'true'.
 #
-#       include 'systemd'
+# [*running*]
+#   Instance is to be running/stopped now.  The default is 'true'.
 #
-#       systemd::unit { 'vncserver.service':
-#           content => template('vnc/vncserver.service'),
-#       }
+# [*content*]
+#   Literal content for the unit file.  One and only one of "content"
+#   or "source" must be given.
+#
+# [*source*]
+#   URI of the unit file content.  One and only one of "content" or
+#   "source" must be given.
+#
+# [*restart_events*]
+#   Event or list of events that should cause the unit to be restarted.  The
+#   default is 'undef'.
+#
+# === Authors
+#
+#   John Florian <john.florian@dart.biz>
 
 
 define systemd::unit ($ensure='present', $enable=true, $running=true,
