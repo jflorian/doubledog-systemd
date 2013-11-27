@@ -21,7 +21,7 @@
 #
 # Example usage:
 #
-#       include systemd
+#       include 'systemd'
 #
 #       systemd::unit { 'vncserver.service':
 #           content => template('vnc/vncserver.service'),
