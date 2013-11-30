@@ -91,7 +91,7 @@ define systemd::mount (
         $mnt_timeout_sec=undef,
     ) {
 
-    $real_name = $mnt_where ? {
+    $real_mnt_where = $mnt_where ? {
         undef   => $name,
         default => $mnt_where,
     }
@@ -100,9 +100,9 @@ define systemd::mount (
     # for unprintable characters but is believed to otherwise be correct.
     # Search for "file system name space" or "escape the path" in
     # systemd.unit(5) for the exact rules.
-    $sterile_name = $real_name ? {
+    $sterile_name = $real_mnt_where ? {
         '/'     => '-',
-        default => regsubst(regsubst($real_name, '^/|/$', ''), '/', '-', 'G')
+        default => regsubst(regsubst($real_mnt_where, '^/|/$', ''), '/', '-', 'G')
     }
 
     systemd::unit { "${sterile_name}.mount":
