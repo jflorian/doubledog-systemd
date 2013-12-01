@@ -1,6 +1,5 @@
 [Unit]
 Description=<%= mnt_description %>
-DefaultDependencies=no
 <% if @mnt_requires -%>
 Requires=<%= mnt_requires %>
 <% end -%>
@@ -25,4 +24,9 @@ DirectoryMode=<%= mnt_dir_mode %>
 <% end -%>
 <% if @mnt_timeout -%>
 TimeoutSec=<%= mnt_timeout %>
+<% end -%>
+
+<% if @enable -%>
+[Install]
+WantedBy=multi-user.target
 <% end -%>
