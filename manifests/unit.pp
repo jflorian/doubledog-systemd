@@ -55,6 +55,18 @@ define systemd::unit (
         seltype => 'systemd_unit_file_t',
     }
 
+    if $enable != true and $enable != false {
+        fail('$enable must be "true" or "false"')
+    }
+
+    if $running != true and $running != false {
+        fail('$running must be "true" or "false"')
+    }
+
+    if $content == undef and $source == undef {
+        fail('either $content or $source must be set')
+    }
+
     if $ensure == 'present' {
 
         exec { "systemctl enable ${name}":
@@ -88,18 +100,6 @@ define systemd::unit (
 
     } else {
         fail('$ensure must be "present" or "absent"')
-    }
-
-    if $enable != true and $enable != false {
-        fail('$enable must be "true" or "false"')
-    }
-
-    if $running != true and $running != false {
-        fail('$running must be "true" or "false"')
-    }
-
-    if $content == undef and $source == undef {
-        fail('either $content or $source must be set')
     }
 
 
