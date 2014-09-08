@@ -46,17 +46,6 @@ define systemd::unit (
         $restart_events=undef,
     ) {
 
-    File {
-        ensure  => $ensure,
-        owner   => 'root',
-        group   => 'root',
-        mode    => '0640',
-        notify  => Class['systemd::daemon'],
-        seluser => 'system_u',
-        selrole => 'object_r',
-        seltype => 'systemd_unit_file_t',
-    }
-
     if $enable != true and $enable != false {
         fail('$enable must be "true" or "false"')
     }
@@ -113,6 +102,14 @@ define systemd::unit (
 
 
     file { "/etc/systemd/system/${name}":
+        ensure  => $ensure,
+        owner   => 'root',
+        group   => 'root',
+        mode    => '0640',
+        notify  => Class['systemd::daemon'],
+        seluser => 'system_u',
+        selrole => 'object_r',
+        seltype => 'systemd_unit_file_t',
         content => $content,
         source  => $source,
     }
