@@ -35,15 +35,21 @@
 #   John Florian <john.florian@dart.biz>
 
 
-define systemd::unit ($ensure='present', $enable=true, $running=true,
-                      $content=undef, $source=undef, $restart_events=undef) {
+define systemd::unit (
+        $ensure='present',
+        $enable=true,
+        $running=true,
+        $content=undef,
+        $source=undef,
+        $restart_events=undef,
+    ) {
 
     File {
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
         mode    => '0640',
-        notify  => Exec["daemon-reload for unit $name"],
+        notify  => Exec["daemon-reload for unit ${name}"],
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'systemd_unit_file_t',
@@ -51,18 +57,18 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
 
     if $ensure == 'present' {
 
-        exec { "systemctl enable $name":
-            require => Exec["daemon-reload for unit $name"],
-            unless  => "systemctl is-enabled $name",
+        exec { "systemctl enable ${name}":
+            require => Exec["daemon-reload for unit ${name}"],
+            unless  => "systemctl is-enabled ${name}",
         }
 
-        exec { "systemctl start $name":
-            require => Exec["daemon-reload for unit $name"],
-            unless  => "systemctl is-active $name",
+        exec { "systemctl start ${name}":
+            require => Exec["daemon-reload for unit ${name}"],
+            unless  => "systemctl is-active ${name}",
         }
 
         if $restart_events != undef {
-            exec { "systemctl restart $name":
+            exec { "systemctl restart ${name}":
                 refreshonly => true,
                 subscribe   => $restart_events,
             }
@@ -70,12 +76,12 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
 
     } elsif $ensure == 'absent' {
 
-        exec { "systemctl disable $name":
+        exec { "systemctl disable ${name}":
             before => File["/etc/systemd/system/${name}"],
             onlyif => "test -e \"/etc/systemd/system/${name}\"",
         }
 
-        exec { "systemctl stop $name":
+        exec { "systemctl stop ${name}":
             before => File["/etc/systemd/system/${name}"],
             onlyif => "test -e \"/etc/systemd/system/${name}\"",
         }
@@ -102,7 +108,7 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
         source  => $source,
     }
 
-    exec { "daemon-reload for unit $name":
+    exec { "daemon-reload for unit ${name}":
         command     => 'systemctl daemon-reload',
         refreshonly => true,
     }
