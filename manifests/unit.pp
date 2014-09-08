@@ -96,18 +96,10 @@ define systemd::unit ($ensure='present', $enable=true, $running=true,
         fail('either $content or $source must be set')
     }
 
-    if $content != undef {
 
-        file { "/etc/systemd/system/${name}":
-            content => $content,
-        }
-
-    } else {
-
-        file { "/etc/systemd/system/${name}":
-            source  => $source,
-        }
-
+    file { "/etc/systemd/system/${name}":
+        content => $content,
+        source  => $source,
     }
 
     exec { "daemon-reload for unit $name":
