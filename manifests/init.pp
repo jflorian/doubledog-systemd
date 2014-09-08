@@ -11,6 +11,7 @@
 
 class systemd {
 
+    include 'systemd::daemon'
     include 'systemd::params'
 
     package { $systemd::params::packages:

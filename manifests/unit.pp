@@ -49,7 +49,7 @@ define systemd::unit (
         owner   => 'root',
         group   => 'root',
         mode    => '0640',
-        notify  => Exec["daemon-reload for unit ${name}"],
+        notify  => Class['systemd::daemon'],
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'systemd_unit_file_t',
@@ -70,12 +70,12 @@ define systemd::unit (
     if $ensure == 'present' {
 
         exec { "systemctl enable ${name}":
-            require => Exec["daemon-reload for unit ${name}"],
+            require => Class['systemd::daemon'],
             unless  => "systemctl is-enabled ${name}",
         }
 
         exec { "systemctl start ${name}":
-            require => Exec["daemon-reload for unit ${name}"],
+            require => Class['systemd::daemon'],
             unless  => "systemctl is-active ${name}",
         }
 
@@ -106,11 +106,6 @@ define systemd::unit (
     file { "/etc/systemd/system/${name}":
         content => $content,
         source  => $source,
-    }
-
-    exec { "daemon-reload for unit ${name}":
-        command     => 'systemctl daemon-reload',
-        refreshonly => true,
     }
 
 }
