@@ -13,7 +13,9 @@
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*enable*]
-#   Instance is to be enabled at boot.  The default is true.
+#   Instance is to be enabled at boot.  The default is true.  A value of undef
+#   indicates that the boot state is to be left unchanged.  This is the
+#   appropriate choice for units lacking an [Install] section.
 #
 # [*running*]
 #   Instance is to be running/stopped now.  The default is 'true'.
@@ -69,9 +71,16 @@ define systemd::unit (
 
     if $ensure == 'present' {
 
-        exec { "systemctl enable ${name}":
-            require => Class['systemd::daemon'],
-            unless  => "systemctl is-enabled ${name}",
+        if $enable == true {
+            exec { "systemctl enable ${name}":
+                require => Class['systemd::daemon'],
+                unless  => "systemctl is-enabled ${name}",
+            }
+        } elsif $enable == false {
+            exec { "systemctl disable ${name}":
+                require => Class['systemd::daemon'],
+                onlyif  => "systemctl is-enabled ${name}",
+            }
         }
 
         exec { "systemctl start ${name}":
