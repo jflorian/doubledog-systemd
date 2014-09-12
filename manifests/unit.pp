@@ -62,6 +62,8 @@ define systemd::unit (
         $extends=undef,
     ) {
 
+    include 'systemd::daemon'
+
     if $enable != true and $enable != false {
         fail('$enable must be "true" or "false"')
     }
