@@ -114,10 +114,10 @@ define systemd::unit (
         exec { "systemctl restart ${target}":
             refreshonly => true,
             require     => Class['systemd::daemon'],
-            subscribe   => [
+            subscribe   => delete_undef_values([
                 File[$fqfn],
                 $restart_events,
-            ],
+            ]),
         }
 
     } elsif $ensure == 'absent' {
