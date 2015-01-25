@@ -7,7 +7,7 @@
 # === Parameters
 #
 # Yes, the mnt_ prefixing is fugly, but it helps distinguish these from puppet
-# parameters (especially meta-) that share the same name.  Parametes having
+# parameters (especially meta-) that share the same name.  Parameters having
 # this prefix are specifically for the mount unit file content alone.
 #
 # [*namevar*]
