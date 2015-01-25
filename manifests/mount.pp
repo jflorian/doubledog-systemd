@@ -15,15 +15,19 @@
 #   parameter is not set in which case this must provide the value normally
 #   set with the "mnt_where" parameter.
 #
+# [*mnt_what*]
+#   Required.  See "What=" in systemd.mount(5).  Takes an absolute path of
+#   a device node, file or other resource to mount.
+#
+# [*mnt_description*]
+#   Required.  See "Description=" in systemd.unit(5).  A free-form string
+#   describing the mount unit.
+#
 # [*ensure*]
 #   Instance is to be 'present' (default) or 'absent'.
 #
 # [*enable*]
 #   Instance is to be enabled at boot.  The default is true.
-#
-# [*mnt_description*]
-#   See "Description=" in systemd.unit(5).  A free-form string describing the
-#   mount unit.
 #
 # [*mnt_requires*]
 #   See "Requires=" in systemd.unit(5).  Configures requirement dependencies
@@ -39,10 +43,6 @@
 #   See "After=" in systemd.unit(5).  Configures ordering dependencies between
 #   systemd units.  The default is undef meaning this setting is omitted from
 #   the unit file.
-#
-# [*mnt_what*]
-#   See "What=" in systemd.mount(5).  Takes an absolute path of a device node,
-#   file or other resource to mount.
 #
 # [*mnt_where*]
 #   See "Where=" in systemd.mount(5).  Takes an absolute path of a directory
@@ -77,13 +77,13 @@
 
 
 define systemd::mount (
+        $mnt_what,
+        $mnt_description,
         $ensure='present',
         $enable=true,
-        $mnt_description,
         $mnt_requires=undef,
         $mnt_before=undef,
         $mnt_after=undef,
-        $mnt_what,
         $mnt_where=undef,
         $mnt_type=undef,
         $mnt_options=undef,
