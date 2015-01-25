@@ -148,7 +148,7 @@ define systemd::unit (
         ensure  => $ensure,
         owner   => 'root',
         group   => 'root',
-        mode    => '0640',
+        mode    => '0644',
         notify  => Class['systemd::daemon'],
         seluser => 'system_u',
         selrole => 'object_r',
