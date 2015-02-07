@@ -100,6 +100,14 @@ define systemd::mount (
     # for unprintable characters but is believed to otherwise be correct.
     # Search for "file system name space" or "escape the path" in
     # systemd.unit(5) for the exact rules.
+    #
+    # TODO:
+    #
+    # Use this better alternative once Puppet Master is Fedora 21.
+    #   $sterile_name = systemd_escaped_mount_path($real_mnt_where)
+    #
+    # Or better yet, provide the equivalent below in the function if the
+    # systemd-escape command isn't available.
     $sterile_name = $real_mnt_where ? {
         '/'     => '-',
         default => regsubst(regsubst($real_mnt_where, '^/|/$', ''), '/', '-', 'G')
