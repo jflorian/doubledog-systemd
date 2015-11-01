@@ -6,9 +6,13 @@
 #
 # === Parameters
 #
+# ==== Required
+#
 # [*namevar*]
 #   An arbitrary identifier for the unit file.  See systemd.unit(5) for valid
 #   naming requirements.  See "extends" also.
+#
+# ==== Optional
 #
 # [*ensure*]
 #   Instance is to be 'present' (default) or 'absent'.
@@ -49,6 +53,7 @@
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
+#   John Florian <jflorian@doubledog.org>
 
 
 define systemd::unit (
@@ -62,7 +67,7 @@ define systemd::unit (
         $extends=undef,
     ) {
 
-    include 'systemd::daemon'
+    include '::systemd::daemon'
 
     if $enable != true and $enable != false {
         fail('$enable must be "true" or "false"')
@@ -96,24 +101,24 @@ define systemd::unit (
 
         if $enable == true {
             exec { "systemctl enable ${target}":
-                require => Class['systemd::daemon'],
+                require => Class['::systemd::daemon'],
                 unless  => "systemctl is-enabled ${target}",
             }
         } elsif $enable == false {
             exec { "systemctl disable ${target}":
-                require => Class['systemd::daemon'],
+                require => Class['::systemd::daemon'],
                 onlyif  => "systemctl is-enabled ${target}",
             }
         }
 
         exec { "systemctl start ${target}":
-            require => Class['systemd::daemon'],
+            require => Class['::systemd::daemon'],
             unless  => "systemctl is-active ${target}",
         }
 
         exec { "systemctl restart ${target}":
             refreshonly => true,
-            require     => Class['systemd::daemon'],
+            require     => Class['::systemd::daemon'],
             subscribe   => delete_undef_values([
                 File[$fqfn],
                 $restart_events,
@@ -149,7 +154,7 @@ define systemd::unit (
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        notify  => Class['systemd::daemon'],
+        notify  => Class['::systemd::daemon'],
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'systemd_unit_file_t',

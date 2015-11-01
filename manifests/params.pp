@@ -8,11 +8,10 @@ class systemd::params {
 
     case $::operatingsystem {
 
-        'Fedora': {
+        'CentOS', 'Fedora': {
 
-            $packages = [
-                'systemd',
-            ]
+            $packages = 'systemd'
+            $journald_services = 'systemd-journald'
 
         }
 
