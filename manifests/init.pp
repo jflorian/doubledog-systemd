@@ -28,9 +28,9 @@ class systemd {
         subscribe   => Package[$systemd::params::packages],
     }
 
-    if  $operatingsystem == 'Fedora' and
-        $operatingsystemrelease == 'Rawhide' or
-        $operatingsystemrelease >= 18
+    if  $::operatingsystem == 'Fedora' and
+        $::operatingsystemrelease == 'Rawhide' or
+        $::operatingsystemrelease >= 18
     {
 
         file { '/etc/systemd/journald.conf':

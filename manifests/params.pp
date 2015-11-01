@@ -7,7 +7,8 @@
 class systemd::params {
 
     case $::operatingsystem {
-        Fedora: {
+
+        'Fedora': {
 
             $packages = [
                 'systemd',
@@ -16,7 +17,7 @@ class systemd::params {
         }
 
         default: {
-            fail ("The systemd module is not yet supported on ${operatingsystem}.")
+            fail ("${title}: operating system '${::operatingsystem}' is not supported")
         }
 
     }
