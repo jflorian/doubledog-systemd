@@ -29,8 +29,8 @@
 
 
 class systemd::journald (
-        $enable=true,
-        $ensure='running',
+        $enable=$::systemd::params::journald_enable,
+        $ensure=$::systemd::params::journald_ensure,
         $content=undef,
         $source=undef,
     ) inherits ::systemd::params {
