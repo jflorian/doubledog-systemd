@@ -21,8 +21,15 @@ class systemd::params {
 
             $packages = 'systemd'
             $journald_services = 'systemd-journald'
-            $journald_enable = true
-            $journald_ensure = 'running'
+
+            if $::operatingsystemrelease >= '23' {
+                # This is a static service on Fedora 23 and later.
+                $journald_enable = undef
+                $journald_ensure = undef
+            } else {
+                $journald_enable = true
+                $journald_ensure = 'running'
+            }
 
         }
 
