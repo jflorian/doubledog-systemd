@@ -12,8 +12,9 @@ class systemd::params {
 
             $packages = 'systemd'
             $journald_services = 'systemd-journald'
-            $journald_enable = false
-            $journald_ensure = 'running'
+            # This is a static service for CentOS.
+            $journald_enable = undef
+            $journald_ensure = undef
 
         }
 
