@@ -127,14 +127,16 @@ define systemd::unit (
 
     } elsif $ensure == 'absent' {
 
-        exec { "systemctl disable ${target}":
-            before => File[$fqfn],
-            onlyif => "test -e '${fqfn}'",
-        }
+        if $extends == undef {
+            exec { "systemctl disable ${target}":
+                before => File[$fqfn],
+                onlyif => "test -e '${fqfn}'",
+            }
 
-        exec { "systemctl stop ${target}":
-            before => File[$fqfn],
-            onlyif => "test -e '${fqfn}'",
+            exec { "systemctl stop ${target}":
+                before => File[$fqfn],
+                onlyif => "test -e '${fqfn}'",
+            }
         }
 
     } else {
