@@ -1,0 +1,54 @@
+[Unit]
+Description=<%= @mnt_description %>
+<% if @mnt_requires -%>
+<% if @mnt_requires.is_a?(Array) -%>
+Requires=<%= @mnt_requires.join(' ') %>
+<% else -%>
+Requires=<%= @mnt_requires %>
+<% end -%>
+<% end -%>
+<% if @mnt_before -%>
+<% if @mnt_before.is_a?(Array) -%>
+Before=<%= @mnt_before.join(' ') %>
+<% else -%>
+Before=<%= @mnt_before %>
+<% end -%>
+<% end -%>
+<% if @mnt_after -%>
+<% if @mnt_after.is_a?(Array) -%>
+After=<%= @mnt_after.join(' ') %>
+<% else -%>
+After=<%= @mnt_after %>
+<% end -%>
+<% end -%>
+
+[Mount]
+What=<%= @mnt_what %>
+Where=<%= @mnt_where %>
+<% if @mnt_type -%>
+Type=<%= @mnt_type %>
+<% end -%>
+<% if @mnt_options -%>
+<% if @mnt_options.is_a?(Array) -%>
+Options=<%= @mnt_options.join(',') %>
+<% else -%>
+Options=<%= @mnt_options %>
+<% end -%>
+<% end -%>
+<% if @mnt_directorymode -%>
+DirectoryMode=<%= @mnt_directorymode %>
+<% end -%>
+<% if @mnt_timeoutsec -%>
+TimeoutSec=<%= @mnt_timeoutsec %>
+<% end -%>
+
+<% if @enable -%>
+[Install]
+<% if @mnt_wantedby -%>
+<% if @mnt_wantedby.is_a?(Array) -%>
+WantedBy=<%= @mnt_wantedby.join(',') %>
+<% else -%>
+WantedBy=<%= @mnt_wantedby %>
+<% end -%>
+<% end -%>
+<% end -%>

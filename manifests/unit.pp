@@ -2,7 +2,7 @@
 #
 # == Define: systemd::unit
 #
-# Installs a systemd unit configuration file.
+# Manages a systemd unit configuration file.
 #
 # === Parameters
 #
@@ -69,13 +69,11 @@ define systemd::unit (
 
     include '::systemd::daemon'
 
-    if $enable != true and $enable != false {
-        fail('$enable must be "true" or "false"')
+    if $enable != true and $enable != false and $enable != undef {
+        fail('$enable must be "true", "false" or undef')
     }
 
-    if $running != true and $running != false {
-        fail('$running must be "true" or "false"')
-    }
+    validate_bool($running)
 
     if $content == undef and $source == undef {
         fail('either $content or $source must be set')
