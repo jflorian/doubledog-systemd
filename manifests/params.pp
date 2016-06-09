@@ -1,36 +1,29 @@
 # modules/systemd/manifests/params.pp
 #
 # Synopsis:
-#       Parameters for the systemd puppet module.
+#       Parameters for the systemd Puppet module.
+#
+# === Authors
+#
+#   John Florian <jflorian@doubledog.org>
+#
+# === Copyright
+#
+# Copyright 2015-2016 John Florian
 
 
 class systemd::params {
 
     case $::operatingsystem {
 
-        'CentOS': {
+        'CentOS', 'Fedora': {
 
             $packages = 'systemd'
+
+            # This is a static service.
             $journald_services = 'systemd-journald'
-            # This is a static service for CentOS.
             $journald_enable = undef
             $journald_ensure = undef
-
-        }
-
-        'Fedora': {
-
-            $packages = 'systemd'
-            $journald_services = 'systemd-journald'
-
-            if $::operatingsystemrelease >= '23' {
-                # This is a static service on Fedora 23 and later.
-                $journald_enable = undef
-                $journald_ensure = undef
-            } else {
-                $journald_enable = true
-                $journald_ensure = 'running'
-            }
 
         }
 
