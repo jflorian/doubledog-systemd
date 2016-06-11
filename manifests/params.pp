@@ -25,6 +25,11 @@ class systemd::params {
             $journald_enable = undef
             $journald_ensure = undef
 
+            # This is a static service.
+            $logind_services = 'systemd-logind'
+            $logind_enable = undef
+            $logind_ensure = undef
+
         }
 
         default: {

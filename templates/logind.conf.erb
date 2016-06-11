@@ -1,0 +1,77 @@
+# WARNING:
+#  This file is managed by Puppet via the "<%= @module_name %>" module.
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+# Entries in this file show the compile time defaults.
+# You can change settings by editing this file.
+# Defaults can be restored by simply deleting this file.
+#
+# See logind.conf(5) for details.
+
+[Login]
+<% if @nauto_vts -%>
+NAutoVTs=<%= @nauto_vts %>
+<% end -%>
+<% if @reserve_vt -%>
+ReserveVT=<%= @reserve_vt %>
+<% end -%>
+<% if @kill_user_processes -%>
+KillUserProcesses=<%= @kill_user_processes %>
+<% end -%>
+<% if @kill_only_users -%>
+KillOnlyUsers=<%= @kill_only_users %>
+<% end -%>
+<% if @kill_exclude_users -%>
+KillExcludeUsers=<%= @kill_exclude_users %>
+<% end -%>
+<% if @inhibit_delay_max_sec -%>
+InhibitDelayMaxSec=<%= @inhibit_delay_max_sec %>
+<% end -%>
+<% if @handle_power_key -%>
+HandlePowerKey=<%= @handle_power_key %>
+<% end -%>
+<% if @handle_suspend_key -%>
+HandleSuspendKey=<%= @handle_suspend_key %>
+<% end -%>
+<% if @handle_hibernate_key -%>
+HandleHibernateKey=<%= @handle_hibernate_key %>
+<% end -%>
+<% if @handle_lid_switch -%>
+HandleLidSwitch=<%= @handle_lid_switch %>
+<% end -%>
+<% if @handle_lid_switch_docked -%>
+HandleLidSwitchDocked=<%= @handle_lid_switch_docked %>
+<% end -%>
+<% if @power_key_ignore_inhibited -%>
+PowerKeyIgnoreInhibited=<%= @power_key_ignore_inhibited %>
+<% end -%>
+<% if @suspend_key_ignore_inhibited -%>
+SuspendKeyIgnoreInhibited=<%= @suspend_key_ignore_inhibited %>
+<% end -%>
+<% if @hibernate_key_ignore_inhibited -%>
+HibernateKeyIgnoreInhibited=<%= @hibernate_key_ignore_inhibited %>
+<% end -%>
+<% if @lid_switch_ignore_inhibited -%>
+LidSwitchIgnoreInhibited=<%= @lid_switch_ignore_inhibited %>
+<% end -%>
+<% if @holdoff_timeout_sec -%>
+HoldoffTimeoutSec=<%= @holdoff_timeout_sec %>
+<% end -%>
+<% if @idle_action -%>
+IdleAction=<%= @idle_action %>
+<% end -%>
+<% if @idle_action_sec -%>
+IdleActionSec=<%= @idle_action_sec %>
+<% end -%>
+<% if @runtime_directory_size -%>
+RuntimeDirectorySize=<%= @runtime_directory_size %>
+<% end -%>
+<% if @remove_ipc -%>
+RemoveIPC=<%= @remove_ipc %>
+<% end -%>
