@@ -25,7 +25,7 @@
 #
 # === Copyright
 #
-# Copyright 2015-2016 John Florian
+# Copyright 2015-2017 John Florian
 
 
 class systemd::journald (
@@ -37,27 +37,28 @@ class systemd::journald (
 
     include '::systemd'
 
-    File {
-        owner     => 'root',
-        group     => 'root',
-        mode      => '0644',
-        seluser   => 'system_u',
-        selrole   => 'object_r',
-        seltype   => 'etc_t',
-        before    => Service[$::systemd::params::journald_services],
-        notify    => Service[$::systemd::params::journald_services],
-        subscribe => Package[$::systemd::params::packages],
-    }
-
     if $content or $source {
         $source_ = $source
     } else {
         $source_ = 'puppet:///modules/systemd/journald.conf'
     }
 
-    file { '/etc/systemd/journald.conf':
-        content => $content,
-        source  => $source_,
+    file {
+        default:
+            owner     => 'root',
+            group     => 'root',
+            mode      => '0644',
+            seluser   => 'system_u',
+            selrole   => 'object_r',
+            seltype   => 'etc_t',
+            before    => Service[$::systemd::params::journald_services],
+            notify    => Service[$::systemd::params::journald_services],
+            subscribe => Package[$::systemd::params::packages],
+            ;
+        '/etc/systemd/journald.conf':
+            content => $content,
+            source  => $source_,
+            ;
     }
 
     service { $::systemd::params::journald_services:

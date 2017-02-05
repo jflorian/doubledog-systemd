@@ -42,7 +42,7 @@
 #
 # === Copyright
 #
-# Copyright 2015-2016 John Florian
+# Copyright 2015-2017 John Florian
 
 
 class systemd::logind (
@@ -72,20 +72,21 @@ class systemd::logind (
 
     include '::systemd'
 
-    File {
-        owner     => 'root',
-        group     => 'root',
-        mode      => '0644',
-        seluser   => 'system_u',
-        selrole   => 'object_r',
-        seltype   => 'etc_t',
-        before    => Service[$::systemd::params::logind_services],
-        notify    => Service[$::systemd::params::logind_services],
-        subscribe => Package[$::systemd::params::packages],
-    }
-
-    file { '/etc/systemd/logind.conf':
-        content => template('systemd/logind.conf.erb'),
+    file {
+        default:
+            owner     => 'root',
+            group     => 'root',
+            mode      => '0644',
+            seluser   => 'system_u',
+            selrole   => 'object_r',
+            seltype   => 'etc_t',
+            before    => Service[$::systemd::params::logind_services],
+            notify    => Service[$::systemd::params::logind_services],
+            subscribe => Package[$::systemd::params::packages],
+            ;
+        '/etc/systemd/logind.conf':
+            content => template('systemd/logind.conf.erb'),
+            ;
     }
 
     service { $::systemd::params::logind_services:
