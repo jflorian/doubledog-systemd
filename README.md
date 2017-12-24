@@ -67,7 +67,7 @@ The service name of the systemd journald daemon.
 
 ##### other parameters
 
-For the following parameters, see `man journald.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` begins `camel_case`.
+For the following parameters, see `man journald.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` becomes `camel_case`.
 
 Passing `undef` (the default value) causes the compiled defaults for the journald service to be used.  In other words, the setting will not be present in the configuration file.
 
@@ -109,7 +109,7 @@ The service name of the systemd logind daemon.
 
 ##### other parameters
 
-For the following parameters, see `man logind.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` begins `camel_case`.
+For the following parameters, see `man logind.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` becomes `camel_case`.
 
 Passing `undef` (the default value) causes the compiled defaults for the logind service to be used.  In other words, the setting will not be present in the configuration file.
 
