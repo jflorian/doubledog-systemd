@@ -35,6 +35,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [systemd](#systemd-class)
 * [systemd::daemon](#systemddaemon-class)
 * [systemd::journald](#systemdjournald-class)
+* [systemd::logind](#systemdlogind-class)
 
 **Defined types:**
 
@@ -68,6 +69,41 @@ The service name of the systemd journald daemon.
 ##### `source`
 URI to the `journald.conf` file content.  If neither `content` nor `source` is
 given, the content of the file will be provided by this module.
+
+
+#### systemd::logind class
+
+This class manages the systemd logind daemon.
+
+##### `service`
+The service name of the systemd logind daemon.
+
+##### other parameters
+
+For the following parameters, see `man logind.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` begins `camel_case`.
+
+Passing `undef` (the default value) causes the compiled defaults for the logind service to be used.  In other words, the setting will not be present in the configuration file.
+
+* `handle_hibernate_key`
+* `handle_lid_switch`
+* `handle_lid_switch_docked`
+* `handle_power_key`
+* `handle_suspend_key`
+* `hibernate_key_ignore_inhibited`
+* `holdoff_timeout_sec`
+* `idle_action`
+* `idle_action_sec`
+* `inhibit_delay_max_sec`
+* `kill_exclude_users`
+* `kill_only_users`
+* `kill_user_processes`
+* `lid_switch_ignore_inhibited`
+* `nauto_vts`
+* `power_key_ignore_inhibited`
+* `remove_ipc`
+* `reserve_vt`
+* `runtime_directory_size`
+* `suspend_key_ignore_inhibited`
 
 
 ### Defined types

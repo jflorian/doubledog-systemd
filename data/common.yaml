@@ -1,4 +1,25 @@
 ---
 systemd::packages:
     - systemd
-systemd::journald::service:         systemd-journald
+systemd::journald::service:                         systemd-journald
+systemd::logind::handle_hibernate_key:              ~
+systemd::logind::handle_lid_switch:                 ~
+systemd::logind::handle_lid_switch_docked:          ~
+systemd::logind::handle_power_key:                  ~
+systemd::logind::handle_suspend_key:                ~
+systemd::logind::hibernate_key_ignore_inhibited:    ~
+systemd::logind::holdoff_timeout_sec:               ~
+systemd::logind::idle_action:                       ~
+systemd::logind::idle_action_sec:                   ~
+systemd::logind::inhibit_delay_max_sec:             ~
+systemd::logind::kill_exclude_users:                ~
+systemd::logind::kill_only_users:                   ~
+systemd::logind::kill_user_processes:               ~
+systemd::logind::lid_switch_ignore_inhibited:       ~
+systemd::logind::nauto_vts:                         ~
+systemd::logind::power_key_ignore_inhibited:        ~
+systemd::logind::remove_ipc:                        ~
+systemd::logind::reserve_vt:                        ~
+systemd::logind::runtime_directory_size:            ~
+systemd::logind::service:                           systemd-logind
+systemd::logind::suspend_key_ignore_inhibited:      ~
