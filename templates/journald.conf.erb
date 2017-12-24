@@ -1,0 +1,98 @@
+# WARNING:
+#  This file is managed by Puppet via the "<%= @module_name %>" module.
+#
+#  This file is part of systemd.
+#
+#  systemd is free software; you can redistribute it and/or modify it
+#  under the terms of the GNU Lesser General Public License as published by
+#  the Free Software Foundation; either version 2.1 of the License, or
+#  (at your option) any later version.
+#
+#  Entries appearing here are from Puppet and overridde the compile-time
+#  defaults.  Any configuration item missing here continues to use the
+#  compile-time defaults.
+#
+# See journald.conf(5) for details.
+
+[Journal]
+<% if @storage -%>
+Storage=<%= @storage %>
+<% end -%>
+<% if @compress -%>
+Compress=<%= @compress %>
+<% end -%>
+<% if @seal -%>
+Seal=<%= @seal %>
+<% end -%>
+<% if @split_mode -%>
+SplitMode=<%= @split_mode %>
+<% end -%>
+<% if @sync_interval_sec -%>
+SyncIntervalSec=<%= @sync_interval_sec %>
+<% end -%>
+<% if @rate_limit_interval_sec -%>
+RateLimitIntervalSec=<%= @rate_limit_interval_sec %>
+<% end -%>
+<% if @rate_limit_burst -%>
+RateLimitBurst=<%= @rate_limit_burst %>
+<% end -%>
+<% if @system_max_use -%>
+SystemMaxUse=<%= @system_max_use %>
+<% end -%>
+<% if @system_keep_free -%>
+SystemKeepFree=<%= @system_keep_free %>
+<% end -%>
+<% if @system_max_file_size -%>
+SystemMaxFileSize=<%= @system_max_file_size %>
+<% end -%>
+<% if @system_max_files -%>
+SystemMaxFiles=<%= @system_max_files %>
+<% end -%>
+<% if @runtime_max_use -%>
+RuntimeMaxUse=<%= @runtime_max_use %>
+<% end -%>
+<% if @runtime_keep_free -%>
+RuntimeKeepFree=<%= @runtime_keep_free %>
+<% end -%>
+<% if @runtime_max_file_size -%>
+RuntimeMaxFileSize=<%= @runtime_max_file_size %>
+<% end -%>
+<% if @runtime_max_files -%>
+RuntimeMaxFiles=<%= @runtime_max_files %>
+<% end -%>
+<% if @max_retention_sec -%>
+MaxRetentionSec=<%= @max_retention_sec %>
+<% end -%>
+<% if @max_file_sec -%>
+MaxFileSec=<%= @max_file_sec %>
+<% end -%>
+<% if @forward_to_syslog -%>
+ForwardToSyslog=<%= @forward_to_syslog %>
+<% end -%>
+<% if @forward_to_kmsg -%>
+ForwardToKMsg=<%= @forward_to_kmsg %>
+<% end -%>
+<% if @forward_to_console -%>
+ForwardToConsole=<%= @forward_to_console %>
+<% end -%>
+<% if @forward_to_wall -%>
+ForwardToWall=<%= @forward_to_wall %>
+<% end -%>
+<% if @tty_path -%>
+TTYPath=<%= @tty_path %>
+<% end -%>
+<% if @max_level_store -%>
+MaxLevelStore=<%= @max_level_store %>
+<% end -%>
+<% if @max_level_syslog -%>
+MaxLevelSyslog=<%= @max_level_syslog %>
+<% end -%>
+<% if @max_level_kmsg -%>
+MaxLevelKMsg=<%= @max_level_kmsg %>
+<% end -%>
+<% if @max_level_console -%>
+MaxLevelConsole=<%= @max_level_console %>
+<% end -%>
+<% if @max_level_wall -%>
+MaxLevelWall=<%= @max_level_wall %>
+<% end -%>

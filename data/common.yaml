@@ -1,7 +1,36 @@
 ---
 systemd::packages:
     - systemd
+
+systemd::journald::compress:                        ~
+systemd::journald::forward_to_console:              ~
+systemd::journald::forward_to_kmsg:                 ~
+systemd::journald::forward_to_syslog:               ~
+systemd::journald::forward_to_wall:                 ~
+systemd::journald::max_file_sec:                    ~
+systemd::journald::max_level_console:               ~
+systemd::journald::max_level_kmsg:                  ~
+systemd::journald::max_level_store:                 ~
+systemd::journald::max_level_syslog:                ~
+systemd::journald::max_level_wall:                  ~
+systemd::journald::max_retention_sec:               ~
+systemd::journald::rate_limit_burst:                ~
+systemd::journald::rate_limit_interval_sec:         ~
+systemd::journald::runtime_keep_free:               ~
+systemd::journald::runtime_max_file_size:           ~
+systemd::journald::runtime_max_files:               ~
+systemd::journald::runtime_max_use:                 ~
+systemd::journald::seal:                            ~
 systemd::journald::service:                         systemd-journald
+systemd::journald::split_mode:                      ~
+systemd::journald::storage:                         ~
+systemd::journald::sync_interval_sec:               ~
+systemd::journald::system_keep_free:                ~
+systemd::journald::system_max_file_size:            ~
+systemd::journald::system_max_files:                ~
+systemd::journald::system_max_use:                  ~
+systemd::journald::tty_path:                        ~
+
 systemd::logind::handle_hibernate_key:              ~
 systemd::logind::handle_lid_switch:                 ~
 systemd::logind::handle_lid_switch_docked:          ~

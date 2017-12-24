@@ -12,18 +12,37 @@
 
 
 class systemd::journald (
-        $content=undef,
+        $compress,
+        $forward_to_console,
+        $forward_to_kmsg,
+        $forward_to_syslog,
+        $forward_to_wall,
+        $max_file_sec,
+        $max_level_console,
+        $max_level_kmsg,
+        $max_level_store,
+        $max_level_syslog,
+        $max_level_wall,
+        $max_retention_sec,
+        $rate_limit_burst,
+        $rate_limit_interval_sec,
+        $runtime_keep_free,
+        $runtime_max_file_size,
+        $runtime_max_files,
+        $runtime_max_use,
+        $seal,
         String[1]   $service,
-        $source=undef,
+        $split_mode,
+        $storage,
+        $sync_interval_sec,
+        $system_keep_free,
+        $system_max_file_size,
+        $system_max_files,
+        $system_max_use,
+        $tty_path,
     ) {
 
     include '::systemd'
-
-    if $content or $source {
-        $source_ = $source
-    } else {
-        $source_ = 'puppet:///modules/systemd/journald.conf'
-    }
 
     file {
         default:
@@ -38,8 +57,7 @@ class systemd::journald (
             subscribe => Package[$::systemd::packages],
             ;
         '/etc/systemd/journald.conf':
-            content => $content,
-            source  => $source_,
+            content => template('systemd/journald.conf.erb'),
             ;
     }
 
@@ -50,6 +68,5 @@ class systemd::journald (
         hasrestart => true,
         hasstatus  => true,
     }
-
 
 }

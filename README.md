@@ -62,16 +62,42 @@ This class manages the systemd daemon.  Due to the nature of systemd being the i
 
 This class manages the systemd journald daemon.
 
-##### `content`
-Literal content for the `journald.conf` file.  If neither `content` nor
-`source` is given, the content of the file will be provided by this module.
-
 ##### `service`
 The service name of the systemd journald daemon.
 
-##### `source`
-URI to the `journald.conf` file content.  If neither `content` nor `source` is
-given, the content of the file will be provided by this module.
+##### other parameters
+
+For the following parameters, see `man journald.conf` for their use.  The parameter names have been normalized for Puppet so that `CamelCase` begins `camel_case`.
+
+Passing `undef` (the default value) causes the compiled defaults for the journald service to be used.  In other words, the setting will not be present in the configuration file.
+
+* `compress`
+* `forward_to_console`
+* `forward_to_kmsg`
+* `forward_to_syslog`
+* `forward_to_wall`
+* `max_file_sec`
+* `max_level_console`
+* `max_level_kmsg`
+* `max_level_store`
+* `max_level_syslog`
+* `max_level_wall`
+* `max_retention_sec`
+* `rate_limit_burst`
+* `rate_limit_interval_sec`
+* `runtime_keep_free`
+* `runtime_max_file_size`
+* `runtime_max_files`
+* `runtime_max_use`
+* `seal`
+* `split_mode`
+* `storage`
+* `sync_interval_sec`
+* `system_keep_free`
+* `system_max_file_size`
+* `system_max_files`
+* `system_max_use`
+* `tty_path`
 
 
 #### systemd::logind class
