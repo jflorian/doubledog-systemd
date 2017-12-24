@@ -32,10 +32,19 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 **Classes:**
 
+* [systemd](#systemd-class)
+
 **Defined types:**
 
 
 ### Classes
+
+#### systemd class
+
+This class manages the systemd package.
+
+##### `packages`
+An array of package names needed for the systemd installation.  The default should be correct for supported platforms.
 
 
 ### Defined types

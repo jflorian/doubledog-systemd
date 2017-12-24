@@ -1,5 +1,3 @@
-# modules/systemd/manifests/logind.pp
-#
 # == Class: systemd::logind
 #
 # Manages the systemd logind daemon on a host.
@@ -82,7 +80,7 @@ class systemd::logind (
             seltype   => 'etc_t',
             before    => Service[$::systemd::params::logind_services],
             notify    => Service[$::systemd::params::logind_services],
-            subscribe => Package[$::systemd::params::packages],
+            subscribe => Package[$::systemd::packages],
             ;
         '/etc/systemd/logind.conf':
             content => template('systemd/logind.conf.erb'),

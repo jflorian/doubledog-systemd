@@ -1,5 +1,3 @@
-# modules/systemd/manifests/journald.pp
-#
 # == Class: systemd::journald
 #
 # Manages the systemd journald daemon on a host.
@@ -53,7 +51,7 @@ class systemd::journald (
             seltype   => 'etc_t',
             before    => Service[$::systemd::params::journald_services],
             notify    => Service[$::systemd::params::journald_services],
-            subscribe => Package[$::systemd::params::packages],
+            subscribe => Package[$::systemd::packages],
             ;
         '/etc/systemd/journald.conf':
             content => $content,

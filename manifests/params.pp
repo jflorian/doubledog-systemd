@@ -18,8 +18,6 @@ class systemd::params {
 
         'CentOS', 'Fedora': {
 
-            $packages = 'systemd'
-
             # This is a static service.
             $journald_services = 'systemd-journald'
             $journald_enable = undef
