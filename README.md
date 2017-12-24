@@ -34,6 +34,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 * [systemd](#systemd-class)
 * [systemd::daemon](#systemddaemon-class)
+* [systemd::journald](#systemdjournald-class)
 
 **Defined types:**
 
@@ -51,6 +52,22 @@ An array of package names needed for the systemd installation.  The default shou
 #### systemd::daemon class
 
 This class manages the systemd daemon.  Due to the nature of systemd being the init process (PID 1), there is very little to manage here.  This chiefly exists to serve as an event notification target so that the systemd daemon can reload its configuration when needed.
+
+
+#### systemd::journald class
+
+This class manages the systemd journald daemon.
+
+##### `content`
+Literal content for the `journald.conf` file.  If neither `content` nor
+`source` is given, the content of the file will be provided by this module.
+
+##### `service`
+The service name of the systemd journald daemon.
+
+##### `source`
+URI to the `journald.conf` file content.  If neither `content` nor `source` is
+given, the content of the file will be provided by this module.
 
 
 ### Defined types

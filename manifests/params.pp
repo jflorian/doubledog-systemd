@@ -1,5 +1,3 @@
-# modules/systemd/manifests/params.pp
-#
 # Synopsis:
 #       Parameters for the systemd Puppet module.
 #
@@ -9,7 +7,7 @@
 #
 # === Copyright
 #
-# Copyright 2015-2016 John Florian
+# Copyright 2015-2017 John Florian
 
 
 class systemd::params {
@@ -17,11 +15,6 @@ class systemd::params {
     case $::operatingsystem {
 
         'CentOS', 'Fedora': {
-
-            # This is a static service.
-            $journald_services = 'systemd-journald'
-            $journald_enable = undef
-            $journald_ensure = undef
 
             # This is a static service.
             $logind_services = 'systemd-logind'

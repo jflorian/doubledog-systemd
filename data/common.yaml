@@ -1,3 +1,4 @@
 ---
 systemd::packages:
     - systemd
+systemd::journald::service:         systemd-journald

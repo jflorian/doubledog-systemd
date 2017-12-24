@@ -2,21 +2,6 @@
 #
 # Manages the systemd journald daemon on a host.
 #
-# === Parameters
-#
-# ==== Required
-#
-# ==== Optional
-#
-# [*content*]
-#   Literal content for the journald.conf file.  If neither "content" nor
-#   "source" is given, the content of the file will be provided by this
-#   module.
-#
-# [*source*]
-#   URI of the journald.conf file content.  If neither "content" nor "source"
-#   is given, the content of the file will be provided by this module.
-#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
@@ -27,11 +12,10 @@
 
 
 class systemd::journald (
-        $enable=$::systemd::params::journald_enable,
-        $ensure=$::systemd::params::journald_ensure,
         $content=undef,
+        String[1]   $service,
         $source=undef,
-    ) inherits ::systemd::params {
+    ) {
 
     include '::systemd'
 
@@ -49,8 +33,8 @@ class systemd::journald (
             seluser   => 'system_u',
             selrole   => 'object_r',
             seltype   => 'etc_t',
-            before    => Service[$::systemd::params::journald_services],
-            notify    => Service[$::systemd::params::journald_services],
+            before    => Service[$service],
+            notify    => Service[$service],
             subscribe => Package[$::systemd::packages],
             ;
         '/etc/systemd/journald.conf':
@@ -59,9 +43,10 @@ class systemd::journald (
             ;
     }
 
-    service { $::systemd::params::journald_services:
-        ensure     => $ensure,
-        enable     => $enable,
+    service { $service:
+        # This is a static service.
+        ensure     => undef,
+        enable     => undef,
         hasrestart => true,
         hasstatus  => true,
     }
