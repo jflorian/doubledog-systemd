@@ -1,59 +1,15 @@
-# modules/systemd/manifests/unit.pp
-#
 # == Define: systemd::unit
 #
 # Manages a systemd unit configuration file.
-#
-# === Parameters
-#
-# ==== Required
-#
-# [*namevar*]
-#   An arbitrary identifier for the unit file.  See systemd.unit(5) for valid
-#   naming requirements.  See "extends" also.
-#
-# ==== Optional
-#
-# [*ensure*]
-#   Instance is to be 'present' (default) or 'absent'.
-#
-# [*enable*]
-#   Instance is to be enabled at boot.  The default is true.  A value of undef
-#   indicates that the boot state is to be left unchanged.  This is the
-#   appropriate choice for units lacking an [Install] section.
-#
-# [*running*]
-#   Instance is to be running/stopped now.  The default is 'true'.
-#
-# [*content*]
-#   Literal content for the unit file.  One and only one of "content"
-#   or "source" must be given.
-#
-# [*source*]
-#   URI of the unit file content.  One and only one of "content" or
-#   "source" must be given.
-#
-# [*restart_events*]
-#   Event or list of events that should cause the unit to be restarted.  The
-#   default is 'undef'.
-#
-# [*extends*]
-#   Name of an extant unit.  This is useful, for example, if you want to alter
-#   only some fraction of a vendor-provided unit.  Requires systemd >= 198.
-#
-#   When the "extends" parameter is used, "namevar" must have a '.conf'
-#   suffix to be recognized by systemd as a unit extension file.
-#
-# [*path*]
-#   Path to unit file sans the base name.  Defaults to '/etc/systemd/system'
-#   unless "extends" is set in which case the default becomes
-#   "/etc/systemd/system/${extends}.d".  Any missing parent directories will
-#   be created, if necessary.
 #
 # === Authors
 #
 #   John Florian <john.florian@dart.biz>
 #   John Florian <jflorian@doubledog.org>
+#
+# === Copyright
+#
+# Copyright 2013-2017 John Florian
 
 
 define systemd::unit (

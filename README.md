@@ -40,6 +40,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 **Defined types:**
 
 * [systemd::mount](#systemdmount-defined-type)
+* [systemd::unit](#systemdunit-defined-type)
 
 
 ### Classes
@@ -167,6 +168,40 @@ See `Where=` in systemd.mount(5).  Takes an absolute path of a directory of the 
 See `WantedBy=` in systemd.unit(5).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  This may be passed as either as a single string or an array of such.
 
 Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's `require` meta-parameter.  It's your responsibility to ensure they agree.
+
+
+#### systemd::unit defined type
+
+This defined type manages a systemd unit configuration file.
+
+##### `namevar` (REQUIRED)
+An arbitrary identifier for the unit file.  See systemd.unit(5) for valid naming requirements.  See `extends` also.
+
+##### `ensure`
+Instance is to be `present` (default) or `absent`.
+
+##### `enable`
+Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.
+
+##### `running`
+Instance is to be running/stopped now.  The default is `true`.
+
+##### `content`
+Literal content for the unit file.  One and only one of `content` or `source` must be given.
+
+##### `source`
+URI of the unit file content.  One and only one of `content` or `source` must be given.
+
+##### `restart_events`
+Event or list of events that should cause the unit to be restarted.  The default is `undef`.
+
+##### `extends`
+Name of an extant unit.  This is useful, for example, if you want to alter only some fraction of a vendor-provided unit.  Requires systemd >= 198.
+
+When the `extends` parameter is used, `namevar` must have a `.conf` suffix to be recognized by systemd as a unit extension file.
+
+##### `path`
+Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless `extends` is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
 
 
 ## Limitations
