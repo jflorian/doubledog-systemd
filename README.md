@@ -33,6 +33,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 **Classes:**
 
 * [systemd](#systemd-class)
+* [systemd::daemon](#systemddaemon-class)
 
 **Defined types:**
 
@@ -45,6 +46,11 @@ This class manages the systemd package.
 
 ##### `packages`
 An array of package names needed for the systemd installation.  The default should be correct for supported platforms.
+
+
+#### systemd::daemon class
+
+This class manages the systemd daemon.  Due to the nature of systemd being the init process (PID 1), there is very little to manage here.  This chiefly exists to serve as an event notification target so that the systemd daemon can reload its configuration when needed.
 
 
 ### Defined types
