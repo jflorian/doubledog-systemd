@@ -12,20 +12,17 @@
 
 
 define systemd::unit (
-        Variant[Boolean, Enum['present', 'absent']] $ensure='present',
-        $enable=true,
-        $content=undef,
-        $source=undef,
-        $restart_events=undef,
-        $path=undef,
-        $extends=undef,
+        Variant[Boolean, Enum['present', 'absent']]     $ensure='present',
+        Optional[Boolean]                               $enable=true,
+        Optional[String]                                $content=undef,
+        Optional[String]                                $source=undef,
+        Optional[Variant[String[1], Array[String[1]]]]  $restart_events=undef,
+        Optional[String[1]]                             $path=undef,
+        Optional[String[1]]                             $extends=undef,
     ) {
 
     include '::systemd::daemon'
 
-    if $enable != true and $enable != false and $enable != undef {
-        fail('$enable must be "true", "false" or undef')
-    }
 
     if $content == undef and $source == undef {
         fail('either $content or $source must be set')
