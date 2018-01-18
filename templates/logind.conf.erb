@@ -25,10 +25,10 @@ ReserveVT=<%= @reserve_vt %>
 KillUserProcesses=<%= @kill_user_processes %>
 <% end -%>
 <% if @kill_only_users -%>
-KillOnlyUsers=<%= @kill_only_users %>
+KillOnlyUsers=<%= @kill_only_users.join(' ') %>
 <% end -%>
 <% if @kill_exclude_users -%>
-KillExcludeUsers=<%= @kill_exclude_users %>
+KillExcludeUsers=<%= @kill_exclude_users.join(' ') %>
 <% end -%>
 <% if @inhibit_delay_max_sec -%>
 InhibitDelayMaxSec=<%= @inhibit_delay_max_sec %>
