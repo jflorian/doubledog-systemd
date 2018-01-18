@@ -127,7 +127,7 @@ Passing `undef` (the default value) causes the compiled defaults for the logind 
 * `kill_only_users`
 * `kill_user_processes`
 * `lid_switch_ignore_inhibited`
-* `nauto_vts`
+* `n_auto_vts`
 * `power_key_ignore_inhibited`
 * `remove_ipc`
 * `reserve_vt`

@@ -8,7 +8,7 @@
 #
 # === Copyright
 #
-# Copyright 2015-2017 John Florian
+# Copyright 2015-2018 John Florian
 
 
 class systemd::logind (
@@ -26,7 +26,7 @@ class systemd::logind (
         $kill_only_users,
         $kill_user_processes,
         $lid_switch_ignore_inhibited,
-        $nauto_vts,
+        $n_auto_vts,
         $power_key_ignore_inhibited,
         $remove_ipc,
         $reserve_vt,

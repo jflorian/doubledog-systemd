@@ -45,7 +45,7 @@ systemd::logind::kill_exclude_users:                ~
 systemd::logind::kill_only_users:                   ~
 systemd::logind::kill_user_processes:               ~
 systemd::logind::lid_switch_ignore_inhibited:       ~
-systemd::logind::nauto_vts:                         ~
+systemd::logind::n_auto_vts:                        ~
 systemd::logind::power_key_ignore_inhibited:        ~
 systemd::logind::remove_ipc:                        ~
 systemd::logind::reserve_vt:                        ~
