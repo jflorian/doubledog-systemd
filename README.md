@@ -209,9 +209,6 @@ Instance is to be `present` (default) or `absent`.  Alternatively, a Boolean val
 ##### `enable`
 Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.
 
-##### `running`
-Instance is to be running/stopped now.  The default is `true`.
-
 ##### `content`
 Literal content for the unit file.  One and only one of `content` or `source` must be given.
 

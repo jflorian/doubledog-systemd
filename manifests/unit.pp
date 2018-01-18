@@ -14,7 +14,6 @@
 define systemd::unit (
         Variant[Boolean, Enum['present', 'absent']] $ensure='present',
         $enable=true,
-        $running=true,
         $content=undef,
         $source=undef,
         $restart_events=undef,
@@ -27,8 +26,6 @@ define systemd::unit (
     if $enable != true and $enable != false and $enable != undef {
         fail('$enable must be "true", "false" or undef')
     }
-
-    validate_bool($running)
 
     if $content == undef and $source == undef {
         fail('either $content or $source must be set')
