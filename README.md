@@ -152,7 +152,7 @@ An arbitrary identifier for the mount instance unless the `mnt_where` parameter 
 See `What=` in systemd.mount(5).  Takes an absolute path of a device node, file or other resource to mount.
 
 ##### `ensure`
-Instance is to be `present` (default) or `absent`.
+Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean value may also be used with `true` equivalent to `running` and `false` equivalent to `stopped`.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.

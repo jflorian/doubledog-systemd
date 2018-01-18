@@ -8,12 +8,12 @@
 #
 # === Copyright
 #
-# Copyright 2016-2017 John Florian
+# Copyright 2016-2018 John Florian
 
 
 define systemd::mount (
         $mnt_what,
-        $ensure='present',
+        Variant[Boolean, Enum['present', 'absent']] $ensure='present',
         $enable=undef,
         $mnt_after=undef,
         $mnt_before=undef,
