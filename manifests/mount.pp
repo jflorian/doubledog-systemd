@@ -12,19 +12,19 @@
 
 
 define systemd::mount (
-        $mnt_what,
-        Variant[Boolean, Enum['present', 'absent']] $ensure='present',
-        $enable=undef,
-        $mnt_after=undef,
-        $mnt_before=undef,
-        $mnt_description=$title,
-        $mnt_directorymode=undef,
-        $mnt_options=undef,
-        $mnt_requires=undef,
-        $mnt_timeoutsec=undef,
-        $mnt_type=undef,
-        $mnt_wantedby='multi-user.target',
-        $mnt_where=$title,
+        String[1]                                       $mnt_what,
+        Variant[Boolean, Enum['present', 'absent']]     $ensure='present',
+        Optional[Boolean]                               $enable=true,
+        Optional[Variant[String[1], Array[String[1]]]]  $mnt_after=undef,
+        Optional[Variant[String[1], Array[String[1]]]]  $mnt_before=undef,
+        String[1]                                       $mnt_description=$title,
+        Optional[String[3]]                             $mnt_directorymode=undef,
+        Optional[Variant[String[1], Array[String[1]]]]  $mnt_options=undef,
+        Optional[Variant[String[1], Array[String[1]]]]  $mnt_requires=undef,
+        Optional[Integer[0]]                            $mnt_timeoutsec=undef,
+        Optional[String[1]]                             $mnt_type=undef,
+        Variant[String[1], Array[String[1]]]            $mnt_wantedby='multi-user.target',
+        Optional[String[1]]                             $mnt_where=$title,
     ) {
 
     # It might be nice to also validate $mnt_what, but it could be in NFS form
