@@ -14,7 +14,7 @@
 #
 # === Copyright
 #
-# Copyright 2016 John Florian
+# Copyright 2016-2018 John Florian
 
 
 require 'puppet/util/execution'
@@ -42,7 +42,7 @@ EOS
         cmd = "systemd-escape --path --suffix=mount #{path}"
         result = Puppet::Util::Execution.execute(cmd)
 
-        return result
+        return result.chomp
 
     end
 end
