@@ -204,7 +204,7 @@ This defined type manages a systemd unit configuration file.
 An arbitrary identifier for the unit file.  See systemd.unit(5) for valid naming requirements.  See `extends` also.
 
 ##### `ensure`
-Instance is to be `present` (default) or `absent`.
+Instance is to be `present` (default) or `absent`.  Alternatively, a Boolean value may also be used with `true` equivalent to `present` and `false` equivalent to `absent`.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.

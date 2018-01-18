@@ -4,16 +4,15 @@
 #
 # === Authors
 #
-#   John Florian <john.florian@dart.biz>
 #   John Florian <jflorian@doubledog.org>
 #
 # === Copyright
 #
-# Copyright 2013-2017 John Florian
+# Copyright 2013-2018 John Florian
 
 
 define systemd::unit (
-        $ensure='present',
+        Variant[Boolean, Enum['present', 'absent']] $ensure='present',
         $enable=true,
         $running=true,
         $content=undef,
@@ -51,7 +50,7 @@ define systemd::unit (
 
     $fqfn = "${use_path}/${name}"
 
-    if $ensure == 'present' {
+    if $ensure == 'present' or $ensure == true {
 
         if $enable == true {
             exec { "systemctl enable ${target}":
@@ -79,7 +78,7 @@ define systemd::unit (
             ]),
         }
 
-    } elsif $ensure == 'absent' {
+    } else {
 
         if $extends == undef {
             exec { "systemctl disable ${target}":
@@ -93,8 +92,6 @@ define systemd::unit (
             }
         }
 
-    } else {
-        fail('$ensure must be "present" or "absent"')
     }
 
     # NB: Don't collapse command into namevar!  namevar must retain inclusion
