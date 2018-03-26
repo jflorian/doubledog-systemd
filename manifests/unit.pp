@@ -16,7 +16,7 @@ define systemd::unit (
         Optional[Boolean]                               $enable=true,
         Optional[String]                                $content=undef,
         Optional[String]                                $source=undef,
-        Optional[Variant[String[1], Array[String[1]]]]  $restart_events=undef,
+        Optional[Variant[String[1], Array[String[1]], Array[Type[Resource]], Type[Resource]]] $restart_events=undef,
         Optional[String[1]]                             $path=undef,
         Optional[String[1]]                             $extends=undef,
     ) {
