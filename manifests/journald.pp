@@ -1,3 +1,4 @@
+#
 # == Class: systemd::journald
 #
 # Manages the systemd journald daemon on a host.
@@ -8,7 +9,9 @@
 #
 # === Copyright
 #
+# This file is part of the doubledog-systemd Puppet module.
 # Copyright 2015-2018 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 class systemd::journald (
@@ -19,11 +22,11 @@ class systemd::journald (
         Optional[Boolean]                           $forward_to_syslog,
         Optional[Boolean]                           $forward_to_wall,
         Optional[Variant[Integer[0], String[1]]]    $max_file_sec,
-        Optional[Variant[Integer[0, 7], Enum['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug']]] $max_level_console,
-        Optional[Variant[Integer[0, 7], Enum['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug']]] $max_level_kmsg,
-        Optional[Variant[Integer[0, 7], Enum['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug']]] $max_level_store,
-        Optional[Variant[Integer[0, 7], Enum['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug']]] $max_level_syslog,
-        Optional[Variant[Integer[0, 7], Enum['emerg', 'alert', 'crit', 'err', 'warning', 'notice', 'info', 'debug']]] $max_level_wall,
+        Optional[Systemd::Journald::Level]          $max_level_console,
+        Optional[Systemd::Journald::Level]          $max_level_kmsg,
+        Optional[Systemd::Journald::Level]          $max_level_store,
+        Optional[Systemd::Journald::Level]          $max_level_syslog,
+        Optional[Systemd::Journald::Level]          $max_level_wall,
         Optional[Variant[Integer[0], String[1]]]    $max_retention_sec,
         Optional[Variant[Integer[0], String[1]]]    $rate_limit_burst,
         Optional[Variant[Integer[0], String[1]]]    $rate_limit_interval_sec,
