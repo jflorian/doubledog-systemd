@@ -1,3 +1,4 @@
+#
 # == Define: systemd::unit
 #
 # Manages a systemd unit configuration file.
@@ -8,11 +9,13 @@
 #
 # === Copyright
 #
+# This file is part of the doubledog-systemd Puppet module.
 # Copyright 2013-2018 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 define systemd::unit (
-        Variant[Boolean, Enum['present', 'absent']]     $ensure='present',
+        Systemd::File::Ensure                           $ensure='present',
         Optional[Boolean]                               $enable=true,
         Optional[String]                                $content=undef,
         Optional[String]                                $source=undef,

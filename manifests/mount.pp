@@ -1,3 +1,4 @@
+#
 # == Define: systemd::mount
 #
 # Manage a systemd mount unit configuration file.
@@ -8,12 +9,14 @@
 #
 # === Copyright
 #
+# This file is part of the doubledog-systemd Puppet module.
 # Copyright 2016-2018 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 define systemd::mount (
         String[1]                                       $mnt_what,
-        Variant[Boolean, Enum['present', 'absent']]     $ensure='present',
+        Systemd::File::Ensure                           $ensure='present',
         Optional[Boolean]                               $enable=true,
         Optional[Variant[String[1], Array[String[1]]]]  $mnt_after=undef,
         Optional[Variant[String[1], Array[String[1]]]]  $mnt_before=undef,
