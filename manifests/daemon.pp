@@ -1,3 +1,4 @@
+#
 # == Class: systemd::daemon
 #
 # Manage the systemd daemon.
@@ -13,7 +14,9 @@
 #
 # === Copyright
 #
-# Copyright 2014-2017 John Florian
+# This file is part of the doubledog-systemd Puppet module.
+# Copyright 2014-2018 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 class systemd::daemon () {
