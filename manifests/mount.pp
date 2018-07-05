@@ -37,7 +37,7 @@ define systemd::mount (
 
     $sterile_name = systemd_escaped_mount_path($mnt_where)
 
-    ::systemd::unit { "${sterile_name}":
+    ::systemd::unit { $sterile_name:
         ensure  => $ensure,
         enable  => $enable,
         content => template('systemd/mount.erb'),
