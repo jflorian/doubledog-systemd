@@ -1,3 +1,4 @@
+#
 # == Class: systemd::logind
 #
 # Manages the systemd logind daemon on a host.
@@ -8,17 +9,19 @@
 #
 # === Copyright
 #
+# This file is part of the doubledog-systemd Puppet module.
 # Copyright 2015-2018 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 class systemd::logind (
         String[1]                                   $service,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $handle_hibernate_key,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $handle_lid_switch,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $handle_lid_switch_docked,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $handle_power_key,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $handle_suspend_key,
-        Optional[Enum['ignore', 'poweroff', 'reboot', 'halt', 'kexec', 'suspend', 'hibernate', 'hybrid-sleep', 'lock']]   $idle_action,
+        Optional[Systemd::Logind::Event]            $handle_hibernate_key,
+        Optional[Systemd::Logind::Event]            $handle_lid_switch,
+        Optional[Systemd::Logind::Event]            $handle_lid_switch_docked,
+        Optional[Systemd::Logind::Event]            $handle_power_key,
+        Optional[Systemd::Logind::Event]            $handle_suspend_key,
+        Optional[Systemd::Logind::Event]            $idle_action,
         Optional[Boolean]                           $hibernate_key_ignore_inhibited,
         Optional[Integer[0]]                        $holdoff_timeout_sec,
         Optional[Integer[0]]                        $idle_action_sec,
