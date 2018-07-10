@@ -15,7 +15,7 @@
 
 
 define systemd::unit (
-        Systemd::File::Ensure           $ensure='present',
+        Ddolib::File::Ensure            $ensure='present',
         Optional[Boolean]               $enable=true,
         Optional[String]                $content=undef,
         Optional[String]                $source=undef,
