@@ -68,15 +68,22 @@ define systemd::unit (
         $file_ensure = 'present'
 
         if $enable == true {
-            exec { "systemctl enable '${target}'":
-                require => Class['systemd::daemon'],
-                unless  => "systemctl is-enabled '${target}'",
+            exec {
+                default:
+                    path    => '/bin:/usr/bin:/sbin:/usr/sbin',
+                    require => Class['systemd::daemon'],
+                ;
+
+                "systemctl enable '${target}'":
+                    unless => "systemctl is-enabled '${target}'",
+                ;
+
+                "systemctl reenable '${target}'":
+                    refreshonly => true,
+                    subscribe   => Exec["systemctl restart '${target}'"],
+                ;
             }
-            exec { "systemctl reenable '${target}'":
-                refreshonly => true,
-                require     => Class['systemd::daemon'],
-                subscribe   => Exec["systemctl restart '${target}'"],
-            }
+
         } elsif $enable == false {
             exec { "systemctl disable '${target}'":
                 require => Class['systemd::daemon'],
@@ -84,20 +91,23 @@ define systemd::unit (
             }
         }
 
-        exec { "systemctl start '${target}'":
-            require => Class['systemd::daemon'],
-            unless  => "systemctl is-active '${target}'",
-        }
+        exec {
+            default:
+                require => Class['systemd::daemon'],
+            ;
 
-        exec { "systemctl restart '${target}'":
-            refreshonly => true,
-            require     => Class['systemd::daemon'],
-            subscribe   => delete_undef_values([
-                File[$fqfn],
-                $restart_events,
-            ]),
-        }
+            "systemctl start '${target}'":
+                unless  => "systemctl is-active '${target}'",
+            ;
 
+            "systemctl restart '${target}'":
+                refreshonly => true,
+                subscribe   => delete_undef_values([
+                    File[$fqfn],
+                    $restart_events,
+                ]),
+            ;
+        }
     }
 
     # NB: Don't collapse command into namevar!  namevar must retain inclusion

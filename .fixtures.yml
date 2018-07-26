@@ -1,0 +1,10 @@
+fixtures:
+    symlinks:
+      systemd: "#{source_dir}"
+      data: "#{source_dir}/data"
+    repositories:
+      ddolib:
+        repo: https://github.com/jflorian/doubledog-ddolib.git
+      stdlib:
+        repo: https://github.com/puppetlabs/puppetlabs-stdlib.git
+    forge_modules:
