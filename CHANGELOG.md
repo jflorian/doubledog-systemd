@@ -21,6 +21,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 
 ## [2.3.0] WIP
 ### Added
+- Fedora 29 support
 ### Changed
 - switch from Hiera 4 to Hiera 5
 ### Deprecated
