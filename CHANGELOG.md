@@ -24,6 +24,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 - Fedora 29 support
 ### Changed
 - switch from Hiera 4 to Hiera 5
+- dependency on `doubledog/ddolib` now expects 1 >= version < 2
 ### Deprecated
 ### Removed
 - Fedora 26-27 support
