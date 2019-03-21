@@ -25,6 +25,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 - switch from Hiera 4 to Hiera 5
 ### Deprecated
 ### Removed
+- Fedora 26-27 support
 ### Fixed
 ### Security
 
