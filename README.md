@@ -60,6 +60,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Size](#systemdsize-data-type)
 * [Systemd::Unitlist](#systemdunitlist-data-type)
 * [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
+* [Systemd::Logind::Event](#systemdlogindevent-data-type)
 
 **Facts:**
 
@@ -144,14 +145,14 @@ For the following parameters, see `man logind.conf` for their use.  The paramete
 
 Passing `undef` (the default value) causes the compiled defaults for the logind service to be used.  In other words, the setting will not be present in the configuration file.
 
-* `handle_hibernate_key`
-* `handle_lid_switch`
-* `handle_lid_switch_docked`
-* `handle_power_key`
-* `handle_suspend_key`
+* `handle_hibernate_key` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
+* `handle_lid_switch` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
+* `handle_lid_switch_docked` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
+* `handle_power_key` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
+* `handle_suspend_key` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
 * `hibernate_key_ignore_inhibited`
 * `holdoff_timeout_sec` ([Systemd::Period](#systemdperiod-data-type))
-* `idle_action`
+* `idle_action` ([Systemd::Logind::Event](#systemdlogindevent-data-type))
 * `idle_action_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `inhibit_delay_max_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `kill_exclude_users`
@@ -314,6 +315,12 @@ Matches:
 * integers from `0` through `7`, inclusive
 * one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
 
+
+#### Systemd::Logind::Event data type
+
+Matches:
+
+* one of: `ignore`, `poweroff`, `reboot`, `halt`, `kexec`, `suspend`, `hibernate`, `hybrid-sleep` or `lock`
 
 
 ### Facts

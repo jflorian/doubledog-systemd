@@ -35,6 +35,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
     - `Systemd::Size` data type
     - `Systemd::Unitlist` data type
     - `Systemd::Journald::Level` data type
+    - `Systemd::Logind::Event` data type
 ### Changed
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.
