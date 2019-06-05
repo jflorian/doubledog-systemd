@@ -28,6 +28,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
     - `systemd::units`
 - documentation for:
     - `systemd_escaped_mount_path` function
+    - `Systemd::Eventlist` data type
 ### Changed
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.

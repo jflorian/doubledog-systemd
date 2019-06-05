@@ -53,6 +53,8 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 **Data types:**
 
+* [Systemd::Eventlist](#systemdeventlist-data-type)
+
 **Facts:**
 
 **Functions:**
@@ -239,7 +241,7 @@ Literal content for the unit file.  One and only one of `content` or `source` mu
 URI of the unit file content.  One and only one of `content` or `source` must be given.
 
 ##### `restart_events`
-Event or list of events that should cause the unit to be restarted.  The default is `undef`.
+[Event or list of events](#systemdeventlist-data-type) that should cause the unit to be restarted.  The default is `undef`.
 
 ##### `extends`
 Name of an extant unit.  This is useful, for example, if you want to alter only some fraction of a vendor-provided unit.  Requires systemd >= 198.
@@ -251,6 +253,14 @@ Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless 
 
 
 ### Data types
+
+#### Systemd::Eventlist data type
+
+Matches:
+
+* non-empty strings or arrays of them
+* Puppet resource types or arrays of them
+
 
 ### Facts
 
