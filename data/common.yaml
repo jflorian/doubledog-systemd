@@ -1,6 +1,14 @@
+# This file is part of the doubledog-systemd Puppet module.
+# Copyright 2017-2019 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
+
 ---
+
+systemd::mounts:                                    {}
 systemd::packages:
     - systemd
+systemd::units:                                     {}
+
 
 systemd::journald::compress:                        ~
 systemd::journald::forward_to_console:              ~
@@ -30,6 +38,7 @@ systemd::journald::system_max_file_size:            ~
 systemd::journald::system_max_files:                ~
 systemd::journald::system_max_use:                  ~
 systemd::journald::tty_path:                        ~
+
 
 systemd::logind::handle_hibernate_key:              ~
 systemd::logind::handle_lid_switch:                 ~

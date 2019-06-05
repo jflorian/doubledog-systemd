@@ -3,18 +3,15 @@
 #
 # Escape a file system path for a mount point per systemd rules.
 #
-# === Parameters
-#
-# [*path*]
-#   The mount point path that is to be escaped.
-#
 # === Authors
 #
 #   John Florian <jflorian@doubledog.org>
 #
 # === Copyright
 #
-# Copyright 2016-2018 John Florian
+# This file is part of the doubledog-systemd Puppet module.
+# Copyright 2016-2019 John Florian
+# SPDX-License-Identifier: GPL-3.0-or-later
 
 
 require 'puppet/util/execution'
