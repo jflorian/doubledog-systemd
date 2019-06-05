@@ -15,6 +15,7 @@
 
 
 class systemd (
+        Hash[String[1], Hash]       $mounts,
         Array[String[1], 1]         $packages,
     ) {
 
@@ -24,5 +25,7 @@ class systemd (
         ensure => installed,
         notify => Class['systemd::daemon'],
     }
+
+    create_resources(systemd::mount, $mounts)
 
 }

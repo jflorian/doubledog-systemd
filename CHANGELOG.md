@@ -23,6 +23,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ### Added
 - Fedora 30 support
 - Puppet 6 compatibility
+- `systemd::mounts` parameter for Hiera driven declarations
 ### Changed
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.

@@ -64,6 +64,9 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 This class manages the systemd package.
 
+##### `mounts`
+A hash whose keys are mount resource names and whose values are hashes comprising the same parameters you would otherwise pass to the [systemd::mount](#systemdmount-defined-type) defined type.  The default is none.
+
 ##### `packages`
 An array of package names needed for the systemd installation.  The default should be correct for supported platforms.
 

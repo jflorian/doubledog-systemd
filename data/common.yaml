@@ -4,6 +4,7 @@
 
 ---
 
+systemd::mounts:                                    {}
 systemd::packages:
     - systemd
 
