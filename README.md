@@ -58,6 +58,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Period](#systemdperiod-data-type)
 * [Systemd::Rate](#systemdrate-data-type)
 * [Systemd::Size](#systemdsize-data-type)
+* [Systemd::Unitlist](#systemdunitlist-data-type)
 
 **Facts:**
 
@@ -187,12 +188,12 @@ Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean va
 Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.
 
 ##### `mnt_after`
-See `After=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  This may be passed as either as a single string or an array of such.  The default is `undef` meaning this setting is omitted from the unit file.
+See `After=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd start this mount after some other unit, you likely want to do the same via Puppet's sequencing meta-parameters.  It's your responsibility to ensure they agree.
 
 ##### `mnt_before`
-See `Before=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  This may be passed as either as a single string or an array of such.  The default is `undef` meaning this setting is omitted from the unit file.
+See `Before=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd start this mount before some other unit, you likely want to do the same via Puppet's sequencing meta-parameters.  It's your responsibility to ensure they agree.
 
@@ -203,10 +204,10 @@ See `Description=` in systemd.unit(5).  A free-form string describing the mount 
 See `DirectoryMode=` in systemd.mount(5).  Directories of mount points (and any parent directories) are automatically created if needed using this mode.  The default is `undef` meaning this optional setting is omitted from the unit file, which results in a systemd default of `0755`.
 
 ##### `mnt_options`
-See `Options=` in systemd.mount(5).  Mount options to use when mounting.  This may be passed as either as a single string or an array of such.  The default is `undef` meaning this optional setting is omitted from the unit file.
+See `Options=` in systemd.mount(5).  Mount options to use when mounting.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this optional setting is omitted from the unit file.
 
 ##### `mnt_requires`
-See `Requires=` in systemd.unit(5).  Configures requirement dependencies on other systemd units.  This may be passed as either as a single string or an array of such.  The default is `undef` meaning this setting is omitted from the unit file.
+See `Requires=` in systemd.unit(5).  Configures requirement dependencies on other systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd make this mount require some other unit, you likely want to do the same via Puppet's "require" meta-parameter.  It's your responsibility to ensure they agree.
 
@@ -220,7 +221,7 @@ See `Type=` in systemd.mount(5).  Takes a string for the filesystem type.  The d
 See `Where=` in systemd.mount(5).  Takes an absolute path of a directory of the mount point.  See also `namevar` above for an alternate way to specify the mount point.
 
 ##### `mnt_wantedby`
-See `WantedBy=` in systemd.unit(5).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  This may be passed as either as a single string or an array of such.
+See `WantedBy=` in systemd.unit(5).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.
 
 Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's `require` meta-parameter.  It's your responsibility to ensure they agree.
 
@@ -296,6 +297,13 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `K`, `M`, `G`, `T`, `P` or `E`
+
+
+#### Systemd::Unitlist data type
+
+Matches:
+
+* non-empty strings or arrays of them
 
 
 ### Facts
