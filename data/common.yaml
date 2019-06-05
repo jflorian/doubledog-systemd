@@ -7,6 +7,7 @@
 systemd::mounts:                                    {}
 systemd::packages:
     - systemd
+systemd::units:                                     {}
 
 
 systemd::journald::compress:                        ~

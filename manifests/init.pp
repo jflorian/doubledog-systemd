@@ -17,6 +17,7 @@
 class systemd (
         Hash[String[1], Hash]       $mounts,
         Array[String[1], 1]         $packages,
+        Hash[String[1], Hash]       $units,
     ) {
 
     include 'systemd::daemon'
@@ -27,5 +28,7 @@ class systemd (
     }
 
     create_resources(systemd::mount, $mounts)
+
+    create_resources(systemd::unit, $units)
 
 }

@@ -70,6 +70,9 @@ A hash whose keys are mount resource names and whose values are hashes comprisin
 ##### `packages`
 An array of package names needed for the systemd installation.  The default should be correct for supported platforms.
 
+##### `units`
+A hash whose keys are units resource names and whose values are hashes comprising the same parameters you would otherwise pass to the [systemd::unit](#systemdunit-defined-type) defined type.  The default is none.
+
 
 #### systemd::daemon class
 
