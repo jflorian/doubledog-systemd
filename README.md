@@ -55,6 +55,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 * [Systemd::Eventlist](#systemdeventlist-data-type)
 * [Systemd::Flexsize](#systemdflexsize-data-type)
+* [Systemd::Period](#systemdperiod-data-type)
 
 **Facts:**
 
@@ -102,13 +103,13 @@ Passing `undef` (the default value) causes the compiled defaults for the journal
 * `forward_to_kmsg`
 * `forward_to_syslog`
 * `forward_to_wall`
-* `max_file_sec`
+* `max_file_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `max_level_console`
 * `max_level_kmsg`
 * `max_level_store`
 * `max_level_syslog`
 * `max_level_wall`
-* `max_retention_sec`
+* `max_retention_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `rate_limit_burst`
 * `rate_limit_interval_sec`
 * `runtime_keep_free`
@@ -118,7 +119,7 @@ Passing `undef` (the default value) causes the compiled defaults for the journal
 * `seal`
 * `split_mode`
 * `storage`
-* `sync_interval_sec`
+* `sync_interval_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `system_keep_free`
 * `system_max_file_size`
 * `system_max_files`
@@ -145,10 +146,10 @@ Passing `undef` (the default value) causes the compiled defaults for the logind 
 * `handle_power_key`
 * `handle_suspend_key`
 * `hibernate_key_ignore_inhibited`
-* `holdoff_timeout_sec`
+* `holdoff_timeout_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `idle_action`
-* `idle_action_sec`
-* `inhibit_delay_max_sec`
+* `idle_action_sec` ([Systemd::Period](#systemdperiod-data-type))
+* `inhibit_delay_max_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `kill_exclude_users`
 * `kill_only_users`
 * `kill_user_processes`
@@ -269,6 +270,14 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `%`, `K`, `M`, `G`, `T`, `P` or `E`
+
+
+#### Systemd::Period data type
+
+Matches:
+
+* positive integers
+* positive integers followed immediately by one of: `year`, `month`, `week`, `day`, `h` or `m`
 
 
 ### Facts
