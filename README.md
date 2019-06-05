@@ -56,6 +56,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Eventlist](#systemdeventlist-data-type)
 * [Systemd::Flexsize](#systemdflexsize-data-type)
 * [Systemd::Period](#systemdperiod-data-type)
+* [Systemd::Rate](#systemdrate-data-type)
 
 **Facts:**
 
@@ -110,8 +111,8 @@ Passing `undef` (the default value) causes the compiled defaults for the journal
 * `max_level_syslog`
 * `max_level_wall`
 * `max_retention_sec` ([Systemd::Period](#systemdperiod-data-type))
-* `rate_limit_burst`
-* `rate_limit_interval_sec`
+* `rate_limit_burst` ([Systemd::Rate](#systemdrate-data-type))
+* `rate_limit_interval_sec` ([Systemd::Rate](#systemdrate-data-type))
 * `runtime_keep_free`
 * `runtime_max_file_size`
 * `runtime_max_files`
@@ -278,6 +279,14 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `year`, `month`, `week`, `day`, `h` or `m`
+
+
+#### Systemd::Rate data type
+
+Matches:
+
+* positive integers
+* positive integers followed immediately by one of: `min`, `ms`, `us`, `s` or `h`
 
 
 ### Facts
