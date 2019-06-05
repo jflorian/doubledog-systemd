@@ -22,7 +22,9 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ## [2.4.0] WIP
 ### Added
 - Fedora 30 support
+- Puppet 6 compatibility
 ### Changed
+- `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 ### Deprecated
 ### Removed
 ### Fixed
