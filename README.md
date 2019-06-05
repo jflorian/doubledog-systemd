@@ -1,3 +1,9 @@
+<!--
+This file is part of the doubledog-ddolib Puppet module.
+Copyright 2017-2019 John Florian
+SPDX-License-Identifier: GPL-3.0-or-later
+-->
+
 # systemd
 
 #### Table of Contents
@@ -11,6 +17,9 @@
 1. [Reference - An under-the-hood peek at what the module is doing and how](#reference)
     * [Classes](#classes)
     * [Defined types](#defined-types)
+    * [Data types](#data-types)
+    * [Facts](#facts)
+    * [Functions](#functions)
 1. [Limitations - OS compatibility, etc.](#limitations)
 1. [Development - Guide for contributing to the module](#development)
 
@@ -41,6 +50,12 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 * [systemd::mount](#systemdmount-defined-type)
 * [systemd::unit](#systemdunit-defined-type)
+
+**Data types:**
+
+**Facts:**
+
+**Functions:**
 
 
 ### Classes
@@ -227,12 +242,16 @@ When the `extends` parameter is used, `namevar` must have a `.conf` suffix to be
 Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless `extends` is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
 
 
+### Data types
+
+### Facts
+
+### Functions
+
+
 ## Limitations
 
-Tested on modern Fedora and CentOS releases, but likely to work on any Red Hat variant.  Adaptations for other operating systems should be trivial as this module follows the data-in-module paradigm.  See `data/common.yaml` for the most likely obstructions.  If "one size can't fit all", the value should be moved from `data/common.yaml` to `data/os/%{facts.os.name}.yaml` instead.  See `hiera.yaml` for how this is handled.
-
-This should be compatible with Puppet 3.x and is being used with Puppet 4.x as
-well.
+Tested on modern Fedora and CentOS releases, but likely to work on any Red Hat variant.  Adaptations for other operating systems should be trivial as this module follows the data-in-module paradigm.
 
 ## Development
 
