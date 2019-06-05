@@ -57,6 +57,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Flexsize](#systemdflexsize-data-type)
 * [Systemd::Period](#systemdperiod-data-type)
 * [Systemd::Rate](#systemdrate-data-type)
+* [Systemd::Size](#systemdsize-data-type)
 
 **Facts:**
 
@@ -113,18 +114,18 @@ Passing `undef` (the default value) causes the compiled defaults for the journal
 * `max_retention_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `rate_limit_burst` ([Systemd::Rate](#systemdrate-data-type))
 * `rate_limit_interval_sec` ([Systemd::Rate](#systemdrate-data-type))
-* `runtime_keep_free`
-* `runtime_max_file_size`
-* `runtime_max_files`
-* `runtime_max_use`
+* `runtime_keep_free` ([Systemd::Size](#systemdsize-data-type))
+* `runtime_max_file_size` ([Systemd::Size](#systemdsize-data-type))
+* `runtime_max_files` ([Systemd::Size](#systemdsize-data-type))
+* `runtime_max_use` ([Systemd::Size](#systemdsize-data-type))
 * `seal`
 * `split_mode`
 * `storage`
 * `sync_interval_sec` ([Systemd::Period](#systemdperiod-data-type))
-* `system_keep_free`
-* `system_max_file_size`
-* `system_max_files`
-* `system_max_use`
+* `system_keep_free` ([Systemd::Size](#systemdsize-data-type))
+* `system_max_file_size` ([Systemd::Size](#systemdsize-data-type))
+* `system_max_files` ([Systemd::Size](#systemdsize-data-type))
+* `system_max_use` ([Systemd::Size](#systemdsize-data-type))
 * `tty_path`
 
 
@@ -287,6 +288,14 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `min`, `ms`, `us`, `s` or `h`
+
+
+#### Systemd::Size data type
+
+Matches:
+
+* positive integers
+* positive integers followed immediately by one of: `K`, `M`, `G`, `T`, `P` or `E`
 
 
 ### Facts
