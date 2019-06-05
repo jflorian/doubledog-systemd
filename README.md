@@ -59,6 +59,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Rate](#systemdrate-data-type)
 * [Systemd::Size](#systemdsize-data-type)
 * [Systemd::Unitlist](#systemdunitlist-data-type)
+* [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
 
 **Facts:**
 
@@ -107,11 +108,11 @@ Passing `undef` (the default value) causes the compiled defaults for the journal
 * `forward_to_syslog`
 * `forward_to_wall`
 * `max_file_sec` ([Systemd::Period](#systemdperiod-data-type))
-* `max_level_console`
-* `max_level_kmsg`
-* `max_level_store`
-* `max_level_syslog`
-* `max_level_wall`
+* `max_level_console` ([Systemd::Journald::Level](#systemdjournaldlevel-data-type))
+* `max_level_kmsg` ([Systemd::Journald::Level](#systemdjournaldlevel-data-type))
+* `max_level_store` ([Systemd::Journald::Level](#systemdjournaldlevel-data-type))
+* `max_level_syslog` ([Systemd::Journald::Level](#systemdjournaldlevel-data-type))
+* `max_level_wall` ([Systemd::Journald::Level](#systemdjournaldlevel-data-type))
 * `max_retention_sec` ([Systemd::Period](#systemdperiod-data-type))
 * `rate_limit_burst` ([Systemd::Rate](#systemdrate-data-type))
 * `rate_limit_interval_sec` ([Systemd::Rate](#systemdrate-data-type))
@@ -304,6 +305,15 @@ Matches:
 Matches:
 
 * non-empty strings or arrays of them
+
+
+#### Systemd::Journald::Level data type
+
+Matches:
+
+* integers from `0` through `7`, inclusive
+* one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
+
 
 
 ### Facts
