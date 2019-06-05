@@ -57,6 +57,8 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 **Functions:**
 
+* [systemd\_escaped\_mount\_path](#systemd\_escaped\_mount\_path-function)
+
 
 ### Classes
 
@@ -253,6 +255,15 @@ Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless 
 ### Facts
 
 ### Functions
+
+#### systemd\_escaped\_mount\_path function
+
+Returns an escaped file system path for a mount point per systemd rules.
+
+See [SYSTEMD-ESCAPE(1)](https://www.freedesktop.org/software/systemd/man/systemd-escape.html), specifically the `--path` option, for more details.
+
+##### `path`
+The mount point path that is to be escaped.
 
 
 ## Limitations
