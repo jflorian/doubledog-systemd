@@ -181,7 +181,7 @@ Any option below whose name begins with `mnt_` is passed directly to the mount u
 An arbitrary identifier for the mount instance unless the `mnt_where` parameter is not set in which case this must provide the value normally set with the `mnt_where` parameter.
 
 ##### `mnt_what` (REQUIRED)
-See `What=` in systemd.mount(5).  Takes an absolute path of a device node, file or other resource to mount.
+See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#What=).  Takes an absolute path of a device node, file or other resource to mount.
 
 ##### `ensure`
 Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean value may also be used with `true` equivalent to `running` and `false` equivalent to `stopped`.
@@ -190,40 +190,40 @@ Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean va
 Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.
 
 ##### `mnt_after`
-See `After=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
+See `After=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before=).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd start this mount after some other unit, you likely want to do the same via Puppet's sequencing meta-parameters.  It's your responsibility to ensure they agree.
 
 ##### `mnt_before`
-See `Before=` in systemd.unit(5).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
+See `Before=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before=).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd start this mount before some other unit, you likely want to do the same via Puppet's sequencing meta-parameters.  It's your responsibility to ensure they agree.
 
 ##### `mnt_description`
-See `Description=` in systemd.unit(5).  A free-form string describing the mount unit.  Defaults to the resource title.
+See `Description=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Description=).  A free-form string describing the mount unit.  Defaults to the resource title.
 
 ##### `mnt_directorymode`
-See `DirectoryMode=` in systemd.mount(5).  Directories of mount points (and any parent directories) are automatically created if needed using this mode.  The default is `undef` meaning this optional setting is omitted from the unit file, which results in a systemd default of `0755`.
+See `DirectoryMode=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#DirectoryMode=).  Directories of mount points (and any parent directories) are automatically created if needed using this mode.  The default is `undef` meaning this optional setting is omitted from the unit file, which results in a systemd default of `0755`.
 
 ##### `mnt_options`
-See `Options=` in systemd.mount(5).  Mount options to use when mounting.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this optional setting is omitted from the unit file.
+See `Options=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Options=).  Mount options to use when mounting.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this optional setting is omitted from the unit file.
 
 ##### `mnt_requires`
-See `Requires=` in systemd.unit(5).  Configures requirement dependencies on other systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
+See `Requires=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Requires=).  Configures requirement dependencies on other systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
 
 Note that if it makes sense to have systemd make this mount require some other unit, you likely want to do the same via Puppet's "require" meta-parameter.  It's your responsibility to ensure they agree.
 
 ##### `mnt_timeoutsec`
-See `TimeoutSec=` in systemd.mount(5).  Configures the time to wait for the mount command to finish.  The default is `undef` meaning this optional setting is omitted from the unit file, which results in a systemd default of 90 seconds.
+See `TimeoutSec=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#TimeoutSec=).  Configures the time to wait for the mount command to finish.  The default is `undef` meaning this optional setting is omitted from the unit file, which results in a systemd default of 90 seconds.
 
 ##### `mnt_type`
-See `Type=` in systemd.mount(5).  Takes a string for the filesystem type.  The default is `undef` meaning this optional setting is omitted from the unit file.
+See `Type=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Type=).  Takes a string for the filesystem type.  The default is `undef` meaning this optional setting is omitted from the unit file.
 
 ##### `mnt_where`
-See `Where=` in systemd.mount(5).  Takes an absolute path of a directory of the mount point.  See also `namevar` above for an alternate way to specify the mount point.
+See `Where=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Where=).  Takes an absolute path of a directory of the mount point.  See also `namevar` above for an alternate way to specify the mount point.
 
 ##### `mnt_wantedby`
-See `WantedBy=` in systemd.unit(5).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.
+See `WantedBy=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#WantedBy=).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.
 
 Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's `require` meta-parameter.  It's your responsibility to ensure they agree.
 
@@ -233,7 +233,7 @@ Note that if it makes sense to have systemd make this mount be wanted by some ot
 This defined type manages a systemd unit configuration file.
 
 ##### `namevar` (REQUIRED)
-An arbitrary identifier for the unit file.  See systemd.unit(5) for valid naming requirements.  See `extends` also.
+An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See `extends` also.
 
 ##### `ensure`
 Instance is to be `present` (default) or `absent`.  Alternatively, a Boolean value may also be used with `true` equivalent to `present` and `false` equivalent to `absent`.

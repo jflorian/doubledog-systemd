@@ -39,6 +39,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ### Changed
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.
+- README.md now links to official systemd docs where possible
 ### Deprecated
 ### Removed
 ### Fixed
