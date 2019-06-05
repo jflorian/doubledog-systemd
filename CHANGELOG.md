@@ -19,7 +19,7 @@ Template
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [2.4.0] WIP
+## [2.4.0] 2019-06-05
 ### Added
 - Fedora 30 support
 - Puppet 6 compatibility
@@ -40,10 +40,6 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.
 - README.md now links to official systemd docs where possible
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [2.3.0] 2019-03-21
 ### Added
