@@ -10,7 +10,7 @@
 # === Copyright
 #
 # This file is part of the doubledog-systemd Puppet module.
-# Copyright 2015-2018 John Florian
+# Copyright 2015-2019 John Florian
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -45,7 +45,7 @@ class systemd::journald (
         Optional[String[1]]                         $tty_path,
     ) {
 
-    include '::systemd'
+    include 'systemd'
 
     file {
         default:
@@ -57,7 +57,7 @@ class systemd::journald (
             seltype   => 'etc_t',
             before    => Service[$service],
             notify    => Service[$service],
-            subscribe => Package[$::systemd::packages],
+            subscribe => Package[$systemd::packages],
             ;
         '/etc/systemd/journald.conf':
             content => template('systemd/journald.conf.erb'),

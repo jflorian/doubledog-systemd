@@ -10,7 +10,7 @@
 # === Copyright
 #
 # This file is part of the doubledog-systemd Puppet module.
-# Copyright 2013-2018 John Florian
+# Copyright 2013-2019 John Florian
 # SPDX-License-Identifier: GPL-3.0-or-later
 
 
@@ -24,7 +24,7 @@ define systemd::unit (
         Optional[String[1]]             $extends=undef,
     ) {
 
-    include '::systemd::daemon'
+    include 'systemd::daemon'
 
 
     if $content == undef and $source == undef {
@@ -51,24 +51,24 @@ define systemd::unit (
 
         if $enable == true {
             exec { "systemctl enable ${target}":
-                require => Class['::systemd::daemon'],
+                require => Class['systemd::daemon'],
                 unless  => "systemctl is-enabled ${target}",
             }
         } elsif $enable == false {
             exec { "systemctl disable ${target}":
-                require => Class['::systemd::daemon'],
+                require => Class['systemd::daemon'],
                 onlyif  => "systemctl is-enabled ${target}",
             }
         }
 
         exec { "systemctl start ${target}":
-            require => Class['::systemd::daemon'],
+            require => Class['systemd::daemon'],
             unless  => "systemctl is-active ${target}",
         }
 
         exec { "systemctl restart ${target}":
             refreshonly => true,
-            require     => Class['::systemd::daemon'],
+            require     => Class['systemd::daemon'],
             subscribe   => delete_undef_values([
                 File[$fqfn],
                 $restart_events,
@@ -104,7 +104,7 @@ define systemd::unit (
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
-        notify  => Class['::systemd::daemon'],
+        notify  => Class['systemd::daemon'],
         seluser => 'system_u',
         selrole => 'object_r',
         seltype => 'systemd_unit_file_t',
