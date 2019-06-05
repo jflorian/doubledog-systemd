@@ -29,6 +29,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 - documentation for:
     - `systemd_escaped_mount_path` function
     - `Systemd::Eventlist` data type
+    - `Systemd::Flexsize` data type
 ### Changed
 - `validate_absolute_path()` function to `Stdlib::Absolutepath` data type
 - Absolute namespace references have been eliminated.

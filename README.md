@@ -54,6 +54,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 **Data types:**
 
 * [Systemd::Eventlist](#systemdeventlist-data-type)
+* [Systemd::Flexsize](#systemdflexsize-data-type)
 
 **Facts:**
 
@@ -156,7 +157,7 @@ Passing `undef` (the default value) causes the compiled defaults for the logind 
 * `power_key_ignore_inhibited`
 * `remove_ipc`
 * `reserve_vt`
-* `runtime_directory_size`
+* `runtime_directory_size` ([Systemd::Flexsize](#systemdflexsize-data-type))
 * `suspend_key_ignore_inhibited`
 
 
@@ -260,6 +261,14 @@ Matches:
 
 * non-empty strings or arrays of them
 * Puppet resource types or arrays of them
+
+
+#### Systemd::Flexsize data type
+
+Matches:
+
+* positive integers
+* positive integers followed immediately by one of: `%`, `K`, `M`, `G`, `T`, `P` or `E`
 
 
 ### Facts
