@@ -60,6 +60,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 * [Systemd::Period](#systemdperiod-data-type)
 * [Systemd::Rate](#systemdrate-data-type)
 * [Systemd::Size](#systemdsize-data-type)
+* [Systemd::Unit::Ensure](#systemdunitensure-data-type)
 * [Systemd::Unitlist](#systemdunitlist-data-type)
 
 **Facts:**
@@ -314,6 +315,13 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `K`, `M`, `G`, `T`, `P` or `E`
+
+
+#### Systemd::Unit::Ensure data type
+
+Matches:
+
+* one of: `absent`, `present`, `running`, `started` or `stopped`
 
 
 #### Systemd::Unitlist data type
