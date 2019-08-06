@@ -55,12 +55,12 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 * [Systemd::Eventlist](#systemdeventlist-data-type)
 * [Systemd::Flexsize](#systemdflexsize-data-type)
+* [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
+* [Systemd::Logind::Event](#systemdlogindevent-data-type)
 * [Systemd::Period](#systemdperiod-data-type)
 * [Systemd::Rate](#systemdrate-data-type)
 * [Systemd::Size](#systemdsize-data-type)
 * [Systemd::Unitlist](#systemdunitlist-data-type)
-* [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
-* [Systemd::Logind::Event](#systemdlogindevent-data-type)
 
 **Facts:**
 
@@ -277,6 +277,21 @@ Matches:
 * positive integers followed immediately by one of: `%`, `K`, `M`, `G`, `T`, `P` or `E`
 
 
+#### Systemd::Journald::Level data type
+
+Matches:
+
+* integers from `0` through `7`, inclusive
+* one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
+
+
+#### Systemd::Logind::Event data type
+
+Matches:
+
+* one of: `ignore`, `poweroff`, `reboot`, `halt`, `kexec`, `suspend`, `hibernate`, `hybrid-sleep` or `lock`
+
+
 #### Systemd::Period data type
 
 Matches:
@@ -306,21 +321,6 @@ Matches:
 Matches:
 
 * non-empty strings or arrays of them
-
-
-#### Systemd::Journald::Level data type
-
-Matches:
-
-* integers from `0` through `7`, inclusive
-* one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
-
-
-#### Systemd::Logind::Event data type
-
-Matches:
-
-* one of: `ignore`, `poweroff`, `reboot`, `halt`, `kexec`, `suspend`, `hibernate`, `hybrid-sleep` or `lock`
 
 
 ### Facts
