@@ -185,7 +185,7 @@ An arbitrary identifier for the mount instance unless the `mnt_where` parameter 
 See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#What=).  Takes an absolute path of a device node, file or other resource to mount.
 
 ##### `ensure`
-Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean value may also be used with `true` equivalent to `running` and `false` equivalent to `stopped`.
+The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of mount-unit file (`present` (default) or `absent`) or the state of the mount-unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.  It may help to think of these states from the systemd perspective where mounts are just one of many unit types.  Thus `started` means mounted and `stopped` means unmounted.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.
@@ -237,7 +237,7 @@ This defined type manages a systemd unit configuration file.
 An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See `extends` also.
 
 ##### `ensure`
-Instance is to be `present` (default) or `absent`.  Alternatively, a Boolean value may also be used with `true` equivalent to `present` and `false` equivalent to `absent`.
+The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of unit file (`present` (default) or `absent`) or the state of the unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.

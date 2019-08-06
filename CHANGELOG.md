@@ -23,6 +23,10 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ### Added
 - `Systemd::Unit::Ensure` data type
 ### Changed
+- `systemd::unit::ensure` and `systemd::mount::ensure` now only accept values of the `Systemd::Unit::Ensure` data type
+    - Booleans are no longer allowed
+    - `present` and `started` are now valid
+    - some other obscure, nonsensical values are no longer permitted
 ### Deprecated
 ### Removed
 ### Fixed

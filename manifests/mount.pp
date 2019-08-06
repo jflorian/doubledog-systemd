@@ -16,7 +16,7 @@
 
 define systemd::mount (
         String[1]                       $mnt_what,
-        Ddolib::File::Ensure            $ensure='present',
+        Systemd::Unit::Ensure           $ensure='present',
         Optional[Boolean]               $enable=true,
         Optional[Systemd::Unitlist]     $mnt_after=undef,
         Optional[Systemd::Unitlist]     $mnt_before=undef,
