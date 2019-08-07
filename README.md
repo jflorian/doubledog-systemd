@@ -55,18 +55,19 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 * [Systemd::Eventlist](#systemdeventlist-data-type)
 * [Systemd::Flexsize](#systemdflexsize-data-type)
+* [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
+* [Systemd::Logind::Event](#systemdlogindevent-data-type)
 * [Systemd::Period](#systemdperiod-data-type)
 * [Systemd::Rate](#systemdrate-data-type)
 * [Systemd::Size](#systemdsize-data-type)
+* [Systemd::Unit::Ensure](#systemdunitensure-data-type)
 * [Systemd::Unitlist](#systemdunitlist-data-type)
-* [Systemd::Journald::Level](#systemdjournaldlevel-data-type)
-* [Systemd::Logind::Event](#systemdlogindevent-data-type)
 
 **Facts:**
 
 **Functions:**
 
-* [systemd\_escaped\_mount\_path](#systemd\_escaped\_mount\_path-function)
+* [systemd::escape](#systemdescape-function)
 
 
 ### Classes
@@ -178,16 +179,21 @@ Generally, it's advisable to simply use Puppet's `mount` resource type instead o
 Any option below whose name begins with `mnt_` is passed directly to the mount unit as a systemd parameter of the exact same name, sans the prefix.  This helps distinguish these from Puppet parameters (especially meta-) that share the same name.
 
 ##### `namevar` (REQUIRED)
-An arbitrary identifier for the mount instance unless the `mnt_where` parameter is not set in which case this must provide the value normally set with the `mnt_where` parameter.
+An arbitrary identifier for the mount instance unless the *mnt_where* parameter is not set in which case this must provide the value normally set with the *mnt_where* parameter.
 
 ##### `mnt_what` (REQUIRED)
 See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#What=).  Takes an absolute path of a device node, file or other resource to mount.
 
+##### `auto`
+When `true`, an automount unit configuration file will be managed per *ensure* along with the standard mount unit configuration file.  The default is `false`.  See *enabled* for further effects and [SYSTEMD.AUTOMOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.automount.html) for additional details.
+
 ##### `ensure`
-Instance is to be `running` (default) or `stopped`.  Alternatively, a Boolean value may also be used with `true` equivalent to `running` and `false` equivalent to `stopped`.
+The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of mount-unit file (`present` (default) or `absent`) or the state of the mount-unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.  It may help to think of these states from the systemd perspective where mounts are just one of many unit types.  Thus `started` means mounted and `stopped` means unmounted.
 
 ##### `enable`
-Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.
+Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., *mnt_wantedby*).  Typically, this is what you'd want because it's generally better to use *mnt_before* instead so that this mount is ready by the time a target is reached.
+
+When *auto* is `true` the main mount unit will be coerced to a disabled state while the automount unit will be as per *enable*.  This ensures that systemd will not start the mount when starting the target to which the mount unit is installed.  Rather, access to the mount point is required to start the mount unit -- hence mount-on-demand AKA systemd auto-mounting.  This is notable when changing the value of *auto* since when Puppet refreshes the state, it will try to first unmount the filesystem.  If the filesystem is already mounted and in use, the refresh could raise an error.
 
 ##### `mnt_after`
 See `After=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before=).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
@@ -220,12 +226,12 @@ See `TimeoutSec=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/sys
 See `Type=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Type=).  Takes a string for the filesystem type.  The default is `undef` meaning this optional setting is omitted from the unit file.
 
 ##### `mnt_where`
-See `Where=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Where=).  Takes an absolute path of a directory of the mount point.  See also `namevar` above for an alternate way to specify the mount point.
+See `Where=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Where=).  Takes an absolute path of a directory of the mount point.  See also *namevar* above for an alternate way to specify the mount point.
 
 ##### `mnt_wantedby`
 See `WantedBy=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#WantedBy=).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.
 
-Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's `require` meta-parameter.  It's your responsibility to ensure they agree.
+Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's *require* meta-parameter.  It's your responsibility to ensure they agree.
 
 
 #### systemd::unit defined type
@@ -233,19 +239,19 @@ Note that if it makes sense to have systemd make this mount be wanted by some ot
 This defined type manages a systemd unit configuration file.
 
 ##### `namevar` (REQUIRED)
-An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See `extends` also.
+An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See *extends* also.
 
 ##### `ensure`
-Instance is to be `present` (default) or `absent`.  Alternatively, a Boolean value may also be used with `true` equivalent to `present` and `false` equivalent to `absent`.
+The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of unit file (`present` (default) or `absent`) or the state of the unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.
 
 ##### `content`
-Literal content for the unit file.  One and only one of `content` or `source` must be given.
+Literal content for the unit file.  One and only one of *content* or *source* must be given.
 
 ##### `source`
-URI of the unit file content.  One and only one of `content` or `source` must be given.
+URI of the unit file content.  One and only one of *content* or *source* must be given.
 
 ##### `restart_events`
 [Event or list of events](#systemdeventlist-data-type) that should cause the unit to be restarted.  The default is `undef`.
@@ -253,10 +259,10 @@ URI of the unit file content.  One and only one of `content` or `source` must be
 ##### `extends`
 Name of an extant unit.  This is useful, for example, if you want to alter only some fraction of a vendor-provided unit.  Requires systemd >= 198.
 
-When the `extends` parameter is used, `namevar` must have a `.conf` suffix to be recognized by systemd as a unit extension file.
+When the `extends` parameter is used, *namevar* must have a `.conf` suffix to be recognized by systemd as a unit extension file.
 
 ##### `path`
-Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless `extends` is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
+Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless *extends* is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
 
 
 ### Data types
@@ -275,6 +281,21 @@ Matches:
 
 * positive integers
 * positive integers followed immediately by one of: `%`, `K`, `M`, `G`, `T`, `P` or `E`
+
+
+#### Systemd::Journald::Level data type
+
+Matches:
+
+* integers from `0` through `7`, inclusive
+* one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
+
+
+#### Systemd::Logind::Event data type
+
+Matches:
+
+* one of: `ignore`, `poweroff`, `reboot`, `halt`, `kexec`, `suspend`, `hibernate`, `hybrid-sleep` or `lock`
 
 
 #### Systemd::Period data type
@@ -301,6 +322,13 @@ Matches:
 * positive integers followed immediately by one of: `K`, `M`, `G`, `T`, `P` or `E`
 
 
+#### Systemd::Unit::Ensure data type
+
+Matches:
+
+* one of: `absent`, `present`, `running`, `started` or `stopped`
+
+
 #### Systemd::Unitlist data type
 
 Matches:
@@ -308,33 +336,21 @@ Matches:
 * non-empty strings or arrays of them
 
 
-#### Systemd::Journald::Level data type
-
-Matches:
-
-* integers from `0` through `7`, inclusive
-* one of: `emerg` (0), `alert`, `crit`, `err`, `warning`, `notice`, `info` or `debug` (7)
-
-
-#### Systemd::Logind::Event data type
-
-Matches:
-
-* one of: `ignore`, `poweroff`, `reboot`, `halt`, `kexec`, `suspend`, `hibernate`, `hybrid-sleep` or `lock`
-
-
 ### Facts
 
 ### Functions
 
-#### systemd\_escaped\_mount\_path function
+#### systemd::escape function
 
 Returns an escaped file system path for a mount point per systemd rules.
 
 See [SYSTEMD-ESCAPE(1)](https://www.freedesktop.org/software/systemd/man/systemd-escape.html), specifically the `--path` option, for more details.
 
-##### `path`
+##### `path` (REQUIRED)
 The mount point path that is to be escaped.
+
+##### `suffix`
+The unit-type suffix to be included in the returned value.  Defaults to `'mount'`.
 
 
 ## Limitations
