@@ -179,7 +179,7 @@ Generally, it's advisable to simply use Puppet's `mount` resource type instead o
 Any option below whose name begins with `mnt_` is passed directly to the mount unit as a systemd parameter of the exact same name, sans the prefix.  This helps distinguish these from Puppet parameters (especially meta-) that share the same name.
 
 ##### `namevar` (REQUIRED)
-An arbitrary identifier for the mount instance unless the `mnt_where` parameter is not set in which case this must provide the value normally set with the `mnt_where` parameter.
+An arbitrary identifier for the mount instance unless the *mnt_where* parameter is not set in which case this must provide the value normally set with the *mnt_where* parameter.
 
 ##### `mnt_what` (REQUIRED)
 See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#What=).  Takes an absolute path of a device node, file or other resource to mount.
@@ -188,7 +188,7 @@ See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/m
 The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of mount-unit file (`present` (default) or `absent`) or the state of the mount-unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.  It may help to think of these states from the systemd perspective where mounts are just one of many unit types.  Thus `started` means mounted and `stopped` means unmounted.
 
 ##### `enable`
-Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., `mnt_wantedby`).  Typically, this is what you'd want because it's generally better to use `mnt_before` instead so that this mount is ready by the time a target is reached.
+Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., *mnt_wantedby*).  Typically, this is what you'd want because it's generally better to use *mnt_before* instead so that this mount is ready by the time a target is reached.
 
 ##### `mnt_after`
 See `After=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before=).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
@@ -221,12 +221,12 @@ See `TimeoutSec=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/sys
 See `Type=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Type=).  Takes a string for the filesystem type.  The default is `undef` meaning this optional setting is omitted from the unit file.
 
 ##### `mnt_where`
-See `Where=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Where=).  Takes an absolute path of a directory of the mount point.  See also `namevar` above for an alternate way to specify the mount point.
+See `Where=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#Where=).  Takes an absolute path of a directory of the mount point.  See also *namevar* above for an alternate way to specify the mount point.
 
 ##### `mnt_wantedby`
 See `WantedBy=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#WantedBy=).  The systemd target in which this mount is wanted.  This is only relevant when `enabled` is `true`.  Defaults to `multi-user.target`, though values such as `local-fs.target` and `remote-fs.target` may also be good choices.  Run `systemctl -l -t target` for a list of targets.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.
 
-Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's `require` meta-parameter.  It's your responsibility to ensure they agree.
+Note that if it makes sense to have systemd make this mount be wanted by some other unit, you likely want to do the same via Puppet's *require* meta-parameter.  It's your responsibility to ensure they agree.
 
 
 #### systemd::unit defined type
@@ -234,7 +234,7 @@ Note that if it makes sense to have systemd make this mount be wanted by some ot
 This defined type manages a systemd unit configuration file.
 
 ##### `namevar` (REQUIRED)
-An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See `extends` also.
+An arbitrary identifier for the unit file.  See [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html) for valid naming requirements.  See *extends* also.
 
 ##### `ensure`
 The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of unit file (`present` (default) or `absent`) or the state of the unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.
@@ -243,10 +243,10 @@ The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying t
 Instance is to be enabled at boot.  The default is `true`.  A value of `undef` indicates that the boot state is to be left unchanged.  This is the appropriate choice for units lacking an `[Install]` section.
 
 ##### `content`
-Literal content for the unit file.  One and only one of `content` or `source` must be given.
+Literal content for the unit file.  One and only one of *content* or *source* must be given.
 
 ##### `source`
-URI of the unit file content.  One and only one of `content` or `source` must be given.
+URI of the unit file content.  One and only one of *content* or *source* must be given.
 
 ##### `restart_events`
 [Event or list of events](#systemdeventlist-data-type) that should cause the unit to be restarted.  The default is `undef`.
@@ -254,10 +254,10 @@ URI of the unit file content.  One and only one of `content` or `source` must be
 ##### `extends`
 Name of an extant unit.  This is useful, for example, if you want to alter only some fraction of a vendor-provided unit.  Requires systemd >= 198.
 
-When the `extends` parameter is used, `namevar` must have a `.conf` suffix to be recognized by systemd as a unit extension file.
+When the `extends` parameter is used, *namevar* must have a `.conf` suffix to be recognized by systemd as a unit extension file.
 
 ##### `path`
-Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless `extends` is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
+Path to unit file sans the base name.  Defaults to `/etc/systemd/system` unless *extends* is set in which case the default becomes `/etc/systemd/system/${extends}.d`.  Any missing parent directories will be created, if necessary.
 
 
 ### Data types
