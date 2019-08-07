@@ -16,7 +16,8 @@
 
 define systemd::mount (
         String[1]                       $mnt_what,
-        Ddolib::File::Ensure            $ensure='present',
+        Boolean                         $auto=false,
+        Systemd::Unit::Ensure           $ensure='present',
         Optional[Boolean]               $enable=true,
         Optional[Systemd::Unitlist]     $mnt_after=undef,
         Optional[Systemd::Unitlist]     $mnt_before=undef,
@@ -30,11 +31,32 @@ define systemd::mount (
         Optional[Stdlib::Absolutepath]  $mnt_where=$title,
     ) {
 
-    $sterile_name = systemd_escaped_mount_path($mnt_where)
+    $unit_name = systemd::escape($mnt_where)
 
-    systemd::unit { $sterile_name:
-        ensure  => $ensure,
-        enable  => $enable,
-        content => template('systemd/mount.erb'),
+    if $auto {
+
+        systemd::unit { $unit_name:
+            ensure  => $ensure,
+            enable  => false,   # don't static mount; rely on automount
+            content => template('systemd/mount.erb'),
+        }
+
+        $auto_unit_name = systemd::escape($mnt_where, 'automount')
+
+        systemd::unit { $auto_unit_name:
+            ensure  => $ensure,
+            enable  => $enable,
+            content => template('systemd/automount.erb'),
+        }
+
+    } else {
+
+        systemd::unit { $unit_name:
+            ensure  => $ensure,
+            enable  => $enable,
+            content => template('systemd/mount.erb'),
+        }
+
     }
+
 }

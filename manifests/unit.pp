@@ -15,7 +15,7 @@
 
 
 define systemd::unit (
-        Ddolib::File::Ensure            $ensure='present',
+        Systemd::Unit::Ensure           $ensure='present',
         Optional[Boolean]               $enable=true,
         Optional[String]                $content=undef,
         Optional[String]                $source=undef,
@@ -47,7 +47,25 @@ define systemd::unit (
 
     $fqfn = "${use_path}/${name}"
 
-    if $ensure == 'present' or $ensure == true {
+    if $ensure == 'absent' {
+
+        $file_ensure = 'absent'
+
+        if $extends == undef {
+            exec { "systemctl disable ${target}":
+                before => File[$fqfn],
+                onlyif => "test -e '${fqfn}'",
+            }
+
+            exec { "systemctl stop ${target}":
+                before => File[$fqfn],
+                onlyif => "test -e '${fqfn}'",
+            }
+        }
+
+    } else {
+
+        $file_ensure = 'present'
 
         if $enable == true {
             exec { "systemctl enable ${target}":
@@ -75,20 +93,6 @@ define systemd::unit (
             ]),
         }
 
-    } else {
-
-        if $extends == undef {
-            exec { "systemctl disable ${target}":
-                before => File[$fqfn],
-                onlyif => "test -e '${fqfn}'",
-            }
-
-            exec { "systemctl stop ${target}":
-                before => File[$fqfn],
-                onlyif => "test -e '${fqfn}'",
-            }
-        }
-
     }
 
     # NB: Don't collapse command into namevar!  namevar must retain inclusion
@@ -100,7 +104,7 @@ define systemd::unit (
     }
 
     file { $fqfn:
-        ensure  => $ensure,
+        ensure  => $file_ensure,
         owner   => 'root',
         group   => 'root',
         mode    => '0644',
