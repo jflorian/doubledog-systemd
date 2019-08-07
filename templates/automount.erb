@@ -1,10 +1,10 @@
 <%#
 This file is part of the doubledog-systemd Puppet module.
-Copyright 2013-2019 John Florian
+Copyright 2019 John Florian
 SPDX-License-Identifier: GPL-3.0-or-later
 -%>
 [Unit]
-Description=mount <%= @mnt_description %>
+Description=automount <%= @mnt_description %>
 <% if @mnt_requires -%>
 <% if @mnt_requires.is_a?(Array) -%>
 Requires=<%= @mnt_requires.join(' ') %>
@@ -27,25 +27,8 @@ After=<%= @mnt_after %>
 <% end -%>
 <% end -%>
 
-[Mount]
-What=<%= @mnt_what %>
+[Automount]
 Where=<%= @mnt_where %>
-<% if @mnt_type -%>
-Type=<%= @mnt_type %>
-<% end -%>
-<% if @mnt_options -%>
-<% if @mnt_options.is_a?(Array) -%>
-Options=<%= @mnt_options.join(',') %>
-<% else -%>
-Options=<%= @mnt_options %>
-<% end -%>
-<% end -%>
-<% if @mnt_directorymode -%>
-DirectoryMode=<%= @mnt_directorymode %>
-<% end -%>
-<% if @mnt_timeoutsec -%>
-TimeoutSec=<%= @mnt_timeoutsec %>
-<% end -%>
 
 <% if @enable -%>
 [Install]

@@ -67,7 +67,7 @@ This module lets you manage the configuration of systemd, its various daemons an
 
 **Functions:**
 
-* [systemd\_escaped\_mount\_path](#systemd\_escaped\_mount\_path-function)
+* [systemd::escape](#systemdescape-function)
 
 
 ### Classes
@@ -184,11 +184,16 @@ An arbitrary identifier for the mount instance unless the *mnt_where* parameter 
 ##### `mnt_what` (REQUIRED)
 See `What=` in [SYSTEMD.MOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.mount.html#What=).  Takes an absolute path of a device node, file or other resource to mount.
 
+##### `auto`
+When `true`, an automount unit configuration file will be managed per *ensure* along with the standard mount unit configuration file.  The default is `false`.  See *enabled* for further effects and [SYSTEMD.AUTOMOUNT(5)](https://www.freedesktop.org/software/systemd/man/systemd.automount.html) for additional details.
+
 ##### `ensure`
 The [Systemd::Unit::Ensure](#systemdunitensure-data-type) data type specifying the state of mount-unit file (`present` (default) or `absent`) or the state of the mount-unit that file represents (`started` or `stopped`, both of which also imply `present`).  `running` may also be specified and will be treated identically to `started`.  It may help to think of these states from the systemd perspective where mounts are just one of many unit types.  Thus `started` means mounted and `stopped` means unmounted.
 
 ##### `enable`
 Instance is to be enabled at boot.  The default is `undef` which means the mount won't be started as part of a target (i.e., *mnt_wantedby*).  Typically, this is what you'd want because it's generally better to use *mnt_before* instead so that this mount is ready by the time a target is reached.
+
+When *auto* is `true` the main mount unit will be coerced to a disabled state while the automount unit will be as per *enable*.  This ensures that systemd will not start the mount when starting the target to which the mount unit is installed.  Rather, access to the mount point is required to start the mount unit -- hence mount-on-demand AKA systemd auto-mounting.  This is notable when changing the value of *auto* since when Puppet refreshes the state, it will try to first unmount the filesystem.  If the filesystem is already mounted and in use, the refresh could raise an error.
 
 ##### `mnt_after`
 See `After=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Before=).  Configures ordering dependencies between systemd units.  Must match the [Systemd::Unitlist](#systemdunitlist-data-type) data type.  The default is `undef` meaning this setting is omitted from the unit file.
@@ -335,14 +340,17 @@ Matches:
 
 ### Functions
 
-#### systemd\_escaped\_mount\_path function
+#### systemd::escape function
 
 Returns an escaped file system path for a mount point per systemd rules.
 
 See [SYSTEMD-ESCAPE(1)](https://www.freedesktop.org/software/systemd/man/systemd-escape.html), specifically the `--path` option, for more details.
 
-##### `path`
+##### `path` (REQUIRED)
 The mount point path that is to be escaped.
+
+##### `suffix`
+The unit-type suffix to be included in the returned value.  Defaults to `'mount'`.
 
 
 ## Limitations
