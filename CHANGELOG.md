@@ -19,7 +19,7 @@ Template
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [3.0.0] WIP
+## [3.0.0] 2019-08-07
 ### Added
 - `Systemd::Unit::Ensure` data type
 - `systemd::mount::auto` parameter and support for systemd auto-mounting
@@ -32,10 +32,6 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
     - renamed to `systemd::escape()`
     - uses modern Ruby functions API (and thus no longer supports Puppet 3)
     - accepts a 2nd argument to specify the unit type suffix, but defaults to `mount` for backwards compatibility
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [2.4.0] 2019-06-05
 ### Added
