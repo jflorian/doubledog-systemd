@@ -22,6 +22,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ## [3.1.0] WIP
 ### Added
 = `mnt_conflicts` and `mnt_default_dependencies` parameters to `systemd::mount`
+- CentOS 8 support
 ### Changed
 ### Deprecated
 ### Removed
