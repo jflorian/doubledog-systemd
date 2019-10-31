@@ -26,6 +26,20 @@ After=<%= @mnt_after.join(' ') %>
 After=<%= @mnt_after %>
 <% end -%>
 <% end -%>
+<% if @mnt_conflicts -%>
+<% if @mnt_conflicts.is_a?(Array) -%>
+Conflicts=<%= @mnt_conflicts.join(' ') %>
+<% else -%>
+Conflicts=<%= @mnt_conflicts %>
+<% end -%>
+<% end -%>
+<% if @mnt_default_dependencies -%>
+<% if @mnt_default_dependencies.is_a?(Array) -%>
+Conflicts=<%= @mnt_default_dependencies.join(' ') %>
+<% else -%>
+Conflicts=<%= @mnt_default_dependencies %>
+<% end -%>
+<% end -%>
 
 [Mount]
 What=<%= @mnt_what %>

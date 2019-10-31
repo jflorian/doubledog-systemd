@@ -205,6 +205,12 @@ See `Before=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/
 
 Note that if it makes sense to have systemd start this mount before some other unit, you likely want to do the same via Puppet's sequencing meta-parameters.  It's your responsibility to ensure they agree.
 
+##### `mnt_conflicts`
+See `Conflicts=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Conflicts=).  Configures negative requirement dependencies. If a unit has a Conflicts= setting on another unit, starting the former will stop the latter and vice versa.  The default is `undef` meaning this setting is omitted from the unit file.
+
+##### `mnt_default_dependencies`
+See `DefaultDependencies=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#DefaultDependencies=).  Controls whether default dependencies will implicity be created for the unit.  Generally, only services involved with early boot or late shutdown should set this option to no.  The default is `undef` meaning this setting is omitted from the unit file.
+
 ##### `mnt_description`
 See `Description=` in [SYSTEMD.UNIT(5)](https://www.freedesktop.org/software/systemd/man/systemd.unit.html#Description=).  A free-form string describing the mount unit.  Defaults to the resource title.
 
