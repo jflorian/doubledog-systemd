@@ -19,15 +19,10 @@ Template
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [3.1.0] WIP
+## [3.1.0] 2019-10-31
 ### Added
 = `mnt_conflicts` and `mnt_default_dependencies` parameters to `systemd::mount`
 - CentOS 8 support
-### Changed
-### Deprecated
-### Removed
-### Fixed
-### Security
 
 ## [3.0.0] 2019-08-07
 ### Added
