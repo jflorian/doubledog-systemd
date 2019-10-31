@@ -21,6 +21,8 @@ define systemd::mount (
         Optional[Boolean]               $enable=true,
         Optional[Systemd::Unitlist]     $mnt_after=undef,
         Optional[Systemd::Unitlist]     $mnt_before=undef,
+        Optional[Systemd::Unitlist]     $mnt_conflicts=undef,
+        Optional[Systemd::Unitlist]     $mnt_default_dependencies=undef,
         String[1]                       $mnt_description=$title,
         Optional[String[3]]             $mnt_directorymode=undef,
         Optional[Systemd::Unitlist]     $mnt_options=undef,
