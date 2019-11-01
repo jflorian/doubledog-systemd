@@ -34,11 +34,7 @@ Conflicts=<%= @mnt_conflicts %>
 <% end -%>
 <% end -%>
 <% if @mnt_default_dependencies -%>
-<% if @mnt_default_dependencies.is_a?(Array) -%>
-Conflicts=<%= @mnt_default_dependencies.join(' ') %>
-<% else -%>
-Conflicts=<%= @mnt_default_dependencies %>
-<% end -%>
+DefaultDependencies=<%= @mnt_default_dependencies %>
 <% end -%>
 
 [Mount]
