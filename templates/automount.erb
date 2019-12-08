@@ -5,21 +5,21 @@ SPDX-License-Identifier: GPL-3.0-or-later
 -%>
 [Unit]
 Description=automount <%= @mnt_description %>
-<% if @mnt_requires -%>
+<% if defined?(@mnt_requires) -%>
 <% if @mnt_requires.is_a?(Array) -%>
 Requires=<%= @mnt_requires.join(' ') %>
 <% else -%>
 Requires=<%= @mnt_requires %>
 <% end -%>
 <% end -%>
-<% if @mnt_before -%>
+<% if defined?(@mnt_before) -%>
 <% if @mnt_before.is_a?(Array) -%>
 Before=<%= @mnt_before.join(' ') %>
 <% else -%>
 Before=<%= @mnt_before %>
 <% end -%>
 <% end -%>
-<% if @mnt_after -%>
+<% if defined?(@mnt_after) -%>
 <% if @mnt_after.is_a?(Array) -%>
 After=<%= @mnt_after.join(' ') %>
 <% else -%>
@@ -30,7 +30,7 @@ After=<%= @mnt_after %>
 [Automount]
 Where=<%= @mnt_where %>
 
-<% if @enable -%>
+<% if defined?(@enable) -%>
 [Install]
 <% if @mnt_wantedby -%>
 <% if @mnt_wantedby.is_a?(Array) -%>

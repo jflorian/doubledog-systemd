@@ -20,84 +20,84 @@ SPDX-License-Identifier: GPL-3.0-or-later
 # See journald.conf(5) for details.
 
 [Journal]
-<% if @storage -%>
+<% if defined?(@storage) -%>
 Storage=<%= @storage %>
 <% end -%>
-<% if @compress -%>
+<% if defined?(@compress) -%>
 Compress=<%= @compress %>
 <% end -%>
-<% if @seal -%>
+<% if defined?(@seal) -%>
 Seal=<%= @seal %>
 <% end -%>
-<% if @split_mode -%>
+<% if defined?(@split_mode) -%>
 SplitMode=<%= @split_mode %>
 <% end -%>
-<% if @sync_interval_sec -%>
+<% if defined?(@sync_interval_sec) -%>
 SyncIntervalSec=<%= @sync_interval_sec %>
 <% end -%>
-<% if @rate_limit_interval_sec -%>
+<% if defined?(@rate_limit_interval_sec) -%>
 RateLimitIntervalSec=<%= @rate_limit_interval_sec %>
 <% end -%>
-<% if @rate_limit_burst -%>
+<% if defined?(@rate_limit_burst) -%>
 RateLimitBurst=<%= @rate_limit_burst %>
 <% end -%>
-<% if @system_max_use -%>
+<% if defined?(@system_max_use) -%>
 SystemMaxUse=<%= @system_max_use %>
 <% end -%>
-<% if @system_keep_free -%>
+<% if defined?(@system_keep_free) -%>
 SystemKeepFree=<%= @system_keep_free %>
 <% end -%>
-<% if @system_max_file_size -%>
+<% if defined?(@system_max_file_size) -%>
 SystemMaxFileSize=<%= @system_max_file_size %>
 <% end -%>
-<% if @system_max_files -%>
+<% if defined?(@system_max_files) -%>
 SystemMaxFiles=<%= @system_max_files %>
 <% end -%>
-<% if @runtime_max_use -%>
+<% if defined?(@runtime_max_use) -%>
 RuntimeMaxUse=<%= @runtime_max_use %>
 <% end -%>
-<% if @runtime_keep_free -%>
+<% if defined?(@runtime_keep_free) -%>
 RuntimeKeepFree=<%= @runtime_keep_free %>
 <% end -%>
-<% if @runtime_max_file_size -%>
+<% if defined?(@runtime_max_file_size) -%>
 RuntimeMaxFileSize=<%= @runtime_max_file_size %>
 <% end -%>
-<% if @runtime_max_files -%>
+<% if defined?(@runtime_max_files) -%>
 RuntimeMaxFiles=<%= @runtime_max_files %>
 <% end -%>
-<% if @max_retention_sec -%>
+<% if defined?(@max_retention_sec) -%>
 MaxRetentionSec=<%= @max_retention_sec %>
 <% end -%>
-<% if @max_file_sec -%>
+<% if defined?(@max_file_sec) -%>
 MaxFileSec=<%= @max_file_sec %>
 <% end -%>
-<% if @forward_to_syslog -%>
+<% if defined?(@forward_to_syslog) -%>
 ForwardToSyslog=<%= @forward_to_syslog %>
 <% end -%>
-<% if @forward_to_kmsg -%>
+<% if defined?(@forward_to_kmsg) -%>
 ForwardToKMsg=<%= @forward_to_kmsg %>
 <% end -%>
-<% if @forward_to_console -%>
+<% if defined?(@forward_to_console) -%>
 ForwardToConsole=<%= @forward_to_console %>
 <% end -%>
-<% if @forward_to_wall -%>
+<% if defined?(@forward_to_wall) -%>
 ForwardToWall=<%= @forward_to_wall %>
 <% end -%>
-<% if @tty_path -%>
+<% if defined?(@tty_path) -%>
 TTYPath=<%= @tty_path %>
 <% end -%>
-<% if @max_level_store -%>
+<% if defined?(@max_level_store) -%>
 MaxLevelStore=<%= @max_level_store %>
 <% end -%>
-<% if @max_level_syslog -%>
+<% if defined?(@max_level_syslog) -%>
 MaxLevelSyslog=<%= @max_level_syslog %>
 <% end -%>
-<% if @max_level_kmsg -%>
+<% if defined?(@max_level_kmsg) -%>
 MaxLevelKMsg=<%= @max_level_kmsg %>
 <% end -%>
-<% if @max_level_console -%>
+<% if defined?(@max_level_console) -%>
 MaxLevelConsole=<%= @max_level_console %>
 <% end -%>
-<% if @max_level_wall -%>
+<% if defined?(@max_level_wall) -%>
 MaxLevelWall=<%= @max_level_wall %>
 <% end -%>

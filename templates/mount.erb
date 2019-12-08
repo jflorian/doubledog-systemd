@@ -5,61 +5,61 @@ SPDX-License-Identifier: GPL-3.0-or-later
 -%>
 [Unit]
 Description=mount <%= @mnt_description %>
-<% if @mnt_requires -%>
+<% if defined?(@mnt_requires) -%>
 <% if @mnt_requires.is_a?(Array) -%>
 Requires=<%= @mnt_requires.join(' ') %>
 <% else -%>
 Requires=<%= @mnt_requires %>
 <% end -%>
 <% end -%>
-<% if @mnt_before -%>
+<% if defined?(@mnt_before) -%>
 <% if @mnt_before.is_a?(Array) -%>
 Before=<%= @mnt_before.join(' ') %>
 <% else -%>
 Before=<%= @mnt_before %>
 <% end -%>
 <% end -%>
-<% if @mnt_after -%>
+<% if defined?(@mnt_after) -%>
 <% if @mnt_after.is_a?(Array) -%>
 After=<%= @mnt_after.join(' ') %>
 <% else -%>
 After=<%= @mnt_after %>
 <% end -%>
 <% end -%>
-<% if @mnt_conflicts -%>
+<% if defined?(@mnt_conflicts) -%>
 <% if @mnt_conflicts.is_a?(Array) -%>
 Conflicts=<%= @mnt_conflicts.join(' ') %>
 <% else -%>
 Conflicts=<%= @mnt_conflicts %>
 <% end -%>
 <% end -%>
-<% if @mnt_default_dependencies -%>
+<% if defined?(@mnt_default_dependencies) -%>
 DefaultDependencies=<%= @mnt_default_dependencies %>
 <% end -%>
 
 [Mount]
 What=<%= @mnt_what %>
 Where=<%= @mnt_where %>
-<% if @mnt_type -%>
+<% if defined?(@mnt_type) -%>
 Type=<%= @mnt_type %>
 <% end -%>
-<% if @mnt_options -%>
+<% if defined?(@mnt_options) -%>
 <% if @mnt_options.is_a?(Array) -%>
 Options=<%= @mnt_options.join(',') %>
 <% else -%>
 Options=<%= @mnt_options %>
 <% end -%>
 <% end -%>
-<% if @mnt_directorymode -%>
+<% if defined?(@mnt_directorymode) -%>
 DirectoryMode=<%= @mnt_directorymode %>
 <% end -%>
-<% if @mnt_timeoutsec -%>
+<% if defined?(@mnt_timeoutsec) -%>
 TimeoutSec=<%= @mnt_timeoutsec %>
 <% end -%>
 
-<% if @enable -%>
+<% if defined?(@enable) -%>
 [Install]
-<% if @mnt_wantedby -%>
+<% if defined?(@mnt_wantedby) -%>
 <% if @mnt_wantedby.is_a?(Array) -%>
 WantedBy=<%= @mnt_wantedby.join(',') %>
 <% else -%>

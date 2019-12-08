@@ -27,6 +27,8 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ### Fixed
 - altered units may required being re-enabled
     - Restarting a mount unit is insufficient, if `mnt_wantedby` changes since a restart alone won't affect any symlinks in the *UNIT*`.wants` directories.  Of course, re-enabling is applicable only if the unit is to be enabled.
+- false-like settings may be excluded from configs
+    - The templates incorrectly tested for truth rather than null/set to conditionally include a setting in the resultant unit file.  The unit must be affected if the parameter is set (even if `false` or anything else that might evaluate that way in ERB), regardless of the value.  The aim of this module is to only override systemd settings if explicitly declared.  All others are to be omitted so as to rely on the systemd defaults.  A simple example is `mnt_default_dependencies` that is usually true by default, but must be explicitly set off to alter the default.
 ### Security
 
 ## [3.1.1] 2019-11-01
