@@ -20,63 +20,63 @@ SPDX-License-Identifier: GPL-3.0-or-later
 # See logind.conf(5) for details.
 
 [Login]
-<% if @n_auto_vts -%>
+<% if defined?(@n_auto_vts) -%>
 NAutoVTs=<%= @n_auto_vts %>
 <% end -%>
-<% if @reserve_vt -%>
+<% if defined?(@reserve_vt) -%>
 ReserveVT=<%= @reserve_vt %>
 <% end -%>
-<% if @kill_user_processes -%>
+<% if defined?(@kill_user_processes) -%>
 KillUserProcesses=<%= @kill_user_processes %>
 <% end -%>
-<% if @kill_only_users -%>
+<% if defined?(@kill_only_users) -%>
 KillOnlyUsers=<%= @kill_only_users.join(' ') %>
 <% end -%>
-<% if @kill_exclude_users -%>
+<% if defined?(@kill_exclude_users) -%>
 KillExcludeUsers=<%= @kill_exclude_users.join(' ') %>
 <% end -%>
-<% if @inhibit_delay_max_sec -%>
+<% if defined?(@inhibit_delay_max_sec) -%>
 InhibitDelayMaxSec=<%= @inhibit_delay_max_sec %>
 <% end -%>
-<% if @handle_power_key -%>
+<% if defined?(@handle_power_key) -%>
 HandlePowerKey=<%= @handle_power_key %>
 <% end -%>
-<% if @handle_suspend_key -%>
+<% if defined?(@handle_suspend_key) -%>
 HandleSuspendKey=<%= @handle_suspend_key %>
 <% end -%>
-<% if @handle_hibernate_key -%>
+<% if defined?(@handle_hibernate_key) -%>
 HandleHibernateKey=<%= @handle_hibernate_key %>
 <% end -%>
-<% if @handle_lid_switch -%>
+<% if defined?(@handle_lid_switch) -%>
 HandleLidSwitch=<%= @handle_lid_switch %>
 <% end -%>
-<% if @handle_lid_switch_docked -%>
+<% if defined?(@handle_lid_switch_docked) -%>
 HandleLidSwitchDocked=<%= @handle_lid_switch_docked %>
 <% end -%>
-<% if @power_key_ignore_inhibited -%>
+<% if defined?(@power_key_ignore_inhibited) -%>
 PowerKeyIgnoreInhibited=<%= @power_key_ignore_inhibited %>
 <% end -%>
-<% if @suspend_key_ignore_inhibited -%>
+<% if defined?(@suspend_key_ignore_inhibited) -%>
 SuspendKeyIgnoreInhibited=<%= @suspend_key_ignore_inhibited %>
 <% end -%>
-<% if @hibernate_key_ignore_inhibited -%>
+<% if defined?(@hibernate_key_ignore_inhibited) -%>
 HibernateKeyIgnoreInhibited=<%= @hibernate_key_ignore_inhibited %>
 <% end -%>
-<% if @lid_switch_ignore_inhibited -%>
+<% if defined?(@lid_switch_ignore_inhibited) -%>
 LidSwitchIgnoreInhibited=<%= @lid_switch_ignore_inhibited %>
 <% end -%>
-<% if @holdoff_timeout_sec -%>
+<% if defined?(@holdoff_timeout_sec) -%>
 HoldoffTimeoutSec=<%= @holdoff_timeout_sec %>
 <% end -%>
-<% if @idle_action -%>
+<% if defined?(@idle_action) -%>
 IdleAction=<%= @idle_action %>
 <% end -%>
-<% if @idle_action_sec -%>
+<% if defined?(@idle_action_sec) -%>
 IdleActionSec=<%= @idle_action_sec %>
 <% end -%>
-<% if @runtime_directory_size -%>
+<% if defined?(@runtime_directory_size) -%>
 RuntimeDirectorySize=<%= @runtime_directory_size %>
 <% end -%>
-<% if @remove_ipc -%>
+<% if defined?(@remove_ipc) -%>
 RemoveIPC=<%= @remove_ipc %>
 <% end -%>
