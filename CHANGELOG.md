@@ -19,6 +19,16 @@ Template
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
+## [3.1.2] WIP
+### Added
+### Changed
+### Deprecated
+### Removed
+### Fixed
+- altered units may required being re-enabled
+    - Restarting a mount unit is insufficient, if `mnt_wantedby` changes since a restart alone won't affect any symlinks in the *UNIT*`.wants` directories.  Of course, re-enabling is applicable only if the unit is to be enabled.
+### Security
+
 ## [3.1.1] 2019-11-01
 ### Fixed
 - `mnt_default_dependencies` misused in template and wrong data type

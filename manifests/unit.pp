@@ -72,6 +72,11 @@ define systemd::unit (
                 require => Class['systemd::daemon'],
                 unless  => "systemctl is-enabled ${target}",
             }
+            exec { "systemctl reenable ${target}":
+                refreshonly => true,
+                require     => Class['systemd::daemon'],
+                subscribe   => Exec["systemctl restart ${target}"],
+            }
         } elsif $enable == false {
             exec { "systemctl disable ${target}":
                 require => Class['systemd::daemon'],
