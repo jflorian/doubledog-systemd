@@ -4,6 +4,7 @@ group :test do
     gem "rake"
     gem "puppet", ENV['PUPPET_GEM_VERSION'] || '~> 4.2.3'
     gem "rspec-puppet"
+    gem "rspec-puppet-facts"
     gem "puppetlabs_spec_helper"
     gem 'rspec-puppet-utils'
     gem 'hiera-puppet-helper', :git => 'https://github.com/bobtfish/hiera-puppet-helper.git'
@@ -13,12 +14,12 @@ group :test do
 end
 
 # to disable installing the 50+ gems this group contains run : bundle install --without integration
-group :integration do
-    gem "beaker"
-    gem "beaker-rspec"
-    gem "vagrant-wrapper"
-    gem 'serverspec'
-end
+#group :integration do
+#    gem "beaker"
+#    gem "beaker-rspec"
+#    gem "vagrant-wrapper"
+#    gem 'serverspec'
+#end
 
 group :development do
     gem "travis"
