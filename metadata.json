@@ -1,12 +1,18 @@
 {
-    "name": "doubledog-systemd",
-    "version": "3.1.2",
     "author": "John Florian",
-    "summary": "A module to manage all things related to systemd",
-    "license": "GPL-3.0",
-    "source": "https://www.doubledog.org/git/puppet-systemd.git",
-    "project_page": "https://github.com/jflorian/doubledog-systemd",
+    "dependencies": [
+        {
+            "name": "doubledog/ddolib",
+            "version_requirement": ">= 1.0.0 < 2.0.0"
+        },
+        {
+            "name": "puppetlabs/stdlib",
+            "version_requirement": ">= 3.2.0 < 6.0.0"
+        }
+    ],
     "issues_url": "https://github.com/jflorian/doubledog-systemd/issues",
+    "license": "GPL-3.0",
+    "name": "doubledog-systemd",
     "operatingsystem_support": [
         {
             "operatingsystem": "CentOS",
@@ -18,20 +24,14 @@
         {
             "operatingsystem": "Fedora",
             "operatingsystemrelease": [
-                "28",
                 "29",
-                "30"
+                "30",
+                "31"
             ]
         }
     ],
-    "dependencies": [
-        {
-            "name": "doubledog/ddolib",
-            "version_requirement": ">= 1.0.0 < 2.0.0"
-        },
-        {
-            "name": "puppetlabs/stdlib",
-            "version_requirement": ">= 3.2.0 < 6.0.0"
-        }
-    ]
+    "project_page": "https://github.com/jflorian/doubledog-systemd",
+    "source": "https://www.doubledog.org/git/puppet-systemd.git",
+    "summary": "A module to manage all things related to systemd",
+    "version": "3.1.2"
 }
