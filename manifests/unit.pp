@@ -52,12 +52,12 @@ define systemd::unit (
         $file_ensure = 'absent'
 
         if $extends == undef {
-            exec { "systemctl disable ${target}":
+            exec { "systemctl disable '${target}'":
                 before => File[$fqfn],
                 onlyif => "test -e '${fqfn}'",
             }
 
-            exec { "systemctl stop ${target}":
+            exec { "systemctl stop '${target}'":
                 before => File[$fqfn],
                 onlyif => "test -e '${fqfn}'",
             }
@@ -68,28 +68,28 @@ define systemd::unit (
         $file_ensure = 'present'
 
         if $enable == true {
-            exec { "systemctl enable ${target}":
+            exec { "systemctl enable '${target}'":
                 require => Class['systemd::daemon'],
-                unless  => "systemctl is-enabled ${target}",
+                unless  => "systemctl is-enabled '${target}'",
             }
-            exec { "systemctl reenable ${target}":
+            exec { "systemctl reenable '${target}'":
                 refreshonly => true,
                 require     => Class['systemd::daemon'],
-                subscribe   => Exec["systemctl restart ${target}"],
+                subscribe   => Exec["systemctl restart '${target}'"],
             }
         } elsif $enable == false {
-            exec { "systemctl disable ${target}":
+            exec { "systemctl disable '${target}'":
                 require => Class['systemd::daemon'],
-                onlyif  => "systemctl is-enabled ${target}",
+                onlyif  => "systemctl is-enabled '${target}'",
             }
         }
 
-        exec { "systemctl start ${target}":
+        exec { "systemctl start '${target}'":
             require => Class['systemd::daemon'],
-            unless  => "systemctl is-active ${target}",
+            unless  => "systemctl is-active '${target}'",
         }
 
-        exec { "systemctl restart ${target}":
+        exec { "systemctl restart '${target}'":
             refreshonly => true,
             require     => Class['systemd::daemon'],
             subscribe   => delete_undef_values([
