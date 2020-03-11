@@ -1,6 +1,6 @@
 <!--
 This file is part of the doubledog-systemd Puppet module.
-Copyright 2018-2019 John Florian
+Copyright 2018-2020 John Florian
 SPDX-License-Identifier: GPL-3.0-or-later
 
 Template
@@ -18,6 +18,14 @@ Template
 # Change log
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
+
+## [3.2.0] 2020-03-11
+### Added
+- Fedora 31 support
+### Removed
+- Fedora 28 support
+### Fixed
+- unit names must be quoted to ensure proper handling by the shell
 
 ## [3.1.2] 2019-12-08
 ### Fixed
