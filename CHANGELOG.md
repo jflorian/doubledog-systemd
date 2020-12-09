@@ -22,6 +22,7 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 ## [3.3.0] WIP
 ### Added
 - Fedora 32-33 support
+- dependency on `puppetlabs/stdlib` now allows version 6
 ### Changed
 ### Deprecated
 ### Removed
