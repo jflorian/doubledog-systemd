@@ -21,10 +21,12 @@ All notable changes to this project (since v2.2.0) will be documented in this fi
 
 ## [3.4.0] WIP
 ### Added
+- Fedora 34 support
 ### Changed
 - freshened commentary of conf file headers from systemd-248.6-1.fc34
 ### Deprecated
 ### Removed
+- Fedora 31 support
 ### Fixed
 ### Security
 
