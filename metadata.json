@@ -24,14 +24,14 @@
         {
             "operatingsystem": "Fedora",
             "operatingsystemrelease": [
-                "31",
                 "32",
-                "33"
+                "33",
+                "34"
             ]
         }
     ],
     "project_page": "https://github.com/jflorian/doubledog-systemd",
     "source": "https://www.doubledog.org/git/puppet-systemd.git",
     "summary": "A module to manage all things related to systemd",
-    "version": "3.3.0"
+    "version": "3.4.0"
 }
