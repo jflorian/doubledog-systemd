@@ -19,16 +19,13 @@ Template
 
 All notable changes to this project (since v2.2.0) will be documented in this file.  The format is based on [Keep a Changelog](http://keepachangelog.com/en/1.0.0/) and this project adheres to [Semantic Versioning](http://semver.org).
 
-## [3.4.0] WIP
+## [3.4.0] 2021-09-08
 ### Added
 - Fedora 34 support
 ### Changed
 - freshened commentary of conf file headers from systemd-248.6-1.fc34
-### Deprecated
 ### Removed
 - Fedora 31 support
-### Fixed
-### Security
 
 ## [3.3.0] 2020-12-09
 ### Added
